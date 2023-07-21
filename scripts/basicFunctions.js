@@ -1,9 +1,11 @@
+
+
 export function createNode(element) {
     return document.createElement(element);
 }
 
 export function append(parent, el) {
-    return parent.appendChild(el);
+    return parent.append(el);
 }
 
 //Removing all child elements
@@ -19,4 +21,20 @@ export function removeNodesExeptFirstChild(parent, child)
     for (var i = child.length - 1; i > 0; i--) {
         parent.removeChild(child[i]);
       }
+}
+
+export function setIdAttribute(elem, value){
+    elem.setAttribute("id", value);
+}
+
+export function setInnerHTML(elem, value){
+    elem.innerHTML = value;
+}
+
+export function setSrcAttribute(elem, location){
+    elem.setAttribute("src", location);
+}
+
+export function getDay(){
+    const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 }
