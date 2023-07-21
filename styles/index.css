@@ -1,0 +1,62 @@
+:root{
+    --bodyBackground: #7CB3F4;
+    --fontWhite: #F2FBF8;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--bodyBackground);
+    height: 100vh;
+    font-family: 'Kanit', sans-serif;
+}
+
+/* Header start */
+
+header{
+    text-align: center;
+}
+
+header h1{
+    color: var(--fontWhite);
+}
+
+header #search-input{
+    background-color: var(--fontWhite);
+    border: none;
+    padding: 0.4rem;
+}
+
+header #search-btn{
+    border: none;
+    padding: 0.4rem;
+    margin-left: -0.3rem;
+    cursor: pointer;
+}
+
+/* Header End */
+
+
+
+/* Start Current Weather */
+
+#current-weather-container{
+    color: var(--fontWhite);
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#current-weather-container #city-weather ul{
+    list-style: none;
+}
+
+#weather-icon-holder img{
+    width: 8rem;
+}
+
+/* End Current Weather */

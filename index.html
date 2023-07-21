@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles\index.css">
+    <link rel="icon" type="image/x-icon" href="icons\day\116.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0a57beecd2.js" crossorigin="anonymous"></script>
+    
+    <title>Weather Vision</title>
+</head>
+<body>
+    <header>
+        <h1>Weahter Vision</h1>
+        <input id="search-input" type="text" placeholder="City">
+
+        <button id="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </header>
+    
+    <main>
+        <div id="current-weather-container">
+            <div id="city-weather">
+                <ul>
+                    <li><h2>Veliko Tarnovo</h2></li>
+                    <li><h1>22 C</h1></li>
+                    <li><h3>Good weather</h3></li>
+                    <li><p>24/34 feels like 33</p></li>
+                    <li><p>Friday 12:33</p></li>
+                </ul>
+            </div>
+            <div id="weather-icon-holder">
+                <img src="icons\day\113.png" alt="weather icon">
+            </div>
+        </div>
+
+    </main>
+
+    
+    <script src="scripts\basicFunctions.js" type="module"></script>
+    <script src="scripts\index.js" type="module"></script>
+</body>
+</html>
