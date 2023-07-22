@@ -7,12 +7,24 @@ const api = {
     base: "https://api.weatherapi.com/v1/"
 }
 
-const mainEl = document.getElementById("main");
-
 // https://api.weatherapi.com/v1/forecast.json?key=c836ad97ddf247c3bb9162714231907&q=Veliko Turnovo&days=1&aqi=no&alerts=no
 // `${api.base}forecast.json?key={$api.key}&q=${SearchBoxValue}&days=$7&aqi=no&alerts=no`
+
+const mainEl = document.getElementById("main");
+const searchEl = document.getElementById("search-input");
+const searchBtn = document.getElementById("search-btn");
+
 call.getCity(api.key, api.base, "Veliko Turnovo");
+
+searchBtn.addEventListener("click", function(){
+    call.getCity(api.key, api.base, searchEl.value);
+    searchEl.value = "";
+})
+
+
 export function currentWeather(data){
+
+    basic.removeChildNodes(mainEl);
 
     const currentWeatherCon = basic.createNode("div");
     const cityWeatherCon = basic.createNode("div"); 
