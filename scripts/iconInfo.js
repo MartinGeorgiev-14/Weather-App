@@ -1,4 +1,4 @@
-[
+export const iconInfoStorage = [
 	{
 		"code" : 1000,
 		"day" : "Sunny",

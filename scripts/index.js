@@ -1,5 +1,6 @@
 import * as basic from "./basicFunctions.js";
-import * as call from "./calls.js"
+import * as call from "./calls.js";
+import * as specific from "./appSpecific.js";
 
 const api = {
     key: "c836ad97ddf247c3bb9162714231907",
@@ -12,7 +13,7 @@ const mainEl = document.getElementById("main");
 // `${api.base}forecast.json?key={$api.key}&q=${SearchBoxValue}&days=$7&aqi=no&alerts=no`
 call.getCity(api.key, api.base, "Veliko Turnovo");
 export function currentWeather(data){
-    console.log(data);
+
     const currentWeatherCon = basic.createNode("div");
     const cityWeatherCon = basic.createNode("div"); 
     const cityNameEl = basic.createNode("h2");
@@ -27,15 +28,16 @@ export function currentWeather(data){
     basic.setIdAttribute(cityWeatherCon, "city-weather");
     basic.setIdAttribute(weatherIconCon, "weather-icon-holder");
     basic.setIdAttribute(imgEl, "weather-icon-holder");
-    basic.setSrcAttribute(imgEl, "icons/day/113.png")
-    
-    basic.setInnerHTML(cityNameEl, data.location.region);
-    basic.setInnerHTML(degEl, `${data.current["temp_c"]}°`);
+    basic.setSrcAttribute(imgEl, specific.getIconLive(data));
+
+    basic.setInnerHTML(cityNameEl, data.location.name);
+    basic.setInnerHTML(degEl, `${Math.floor(data.current["temp_c"])}°`);
     basic.setInnerHTML(conditionEl, data.current.condition.text);
     basic.setInnerHTML(feelsEl, `${Math.floor(data.forecast.forecastday[0].day["mintemp_c"])}° / 
     ${Math.floor(data.forecast.forecastday[0].day["maxtemp_c"])}° feels like 
     ${Math.floor(data.current["feelslike_c"])}°`); //"33C / 22C Feels like 30C"
-    basic.setInnerHTML(dateEl, "Friday 20:10");
+    basic.setInnerHTML(dateEl, `${specific.getDay(data.location.localtime)}
+    ${specific.getHours(data.location.localtime)}:${specific.getMinutes(data.location.localtime)}`);
 
     basic.append(mainEl, currentWeatherCon);
     basic.append(currentWeatherCon, cityWeatherCon);
@@ -47,9 +49,7 @@ export function currentWeather(data){
     basic.append(currentWeatherCon, weatherIconCon);
     basic.append(weatherIconCon, imgEl);
 
-
-    const date = data.location.localtime;
-    console.log(date);
+   
     //const day = Date.parse(date[0]);
     //console.log(day.getDay());
     //console.log(typeof date === typeof "");

@@ -9,7 +9,7 @@ export async function getCity(key, base, value)
         try 
         {
             if(response.ok)
-            {   console.log(responseData);
+            { 
                 return index.currentWeather(responseData);
             }
             else

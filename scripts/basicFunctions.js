@@ -35,6 +35,3 @@ export function setSrcAttribute(elem, location){
     elem.setAttribute("src", location);
 }
 
-export function getDay(){
-    const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-}

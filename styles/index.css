@@ -29,6 +29,9 @@ header #search-input{
     background-color: var(--fontWhite);
     border: none;
     padding: 0.4rem;
+    outline: none;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
 }
 
 header #search-btn{
@@ -36,6 +39,8 @@ header #search-btn{
     padding: 0.4rem;
     margin-left: -0.3rem;
     cursor: pointer;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 
 /* Header End */
@@ -49,11 +54,9 @@ header #search-btn{
     margin-top: 2rem;
     display: flex;
     justify-content: space-evenly;
+    
 }
 
-#current-weather-container #city-weather ul{
-    list-style: none;
-}
 
 #weather-icon-holder img{
     width: 8rem;
