@@ -44,6 +44,73 @@ export function getIconLive(data){
     }
 }
 
+// Weather slider
+const sliderWrapper = document.getElementById("sliderWrapper");
+let isDragging = false;
+let startPosition = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+const CARD_WIDTH = 67; // Adjust this value based on your card width
+const NUM_CARDS = sliderWrapper.children.length;
+console.log(sliderWrapper.children.length);
+
+sliderWrapper.addEventListener("mousedown", dragStart);
+sliderWrapper.addEventListener("touchstart", dragStart);
+sliderWrapper.addEventListener("mouseup", dragEnd);
+sliderWrapper.addEventListener("touchend", dragEnd);
+sliderWrapper.addEventListener("mousemove", drag);
+sliderWrapper.addEventListener("touchmove", drag);
+
+function dragStart(event) {
+  event.preventDefault();
+  isDragging = true;
+
+  if (event.type === "touchstart") {
+    startPosition = event.touches[0].clientX;
+  } else {
+    startPosition = event.clientX;
+  }
+}
+
+function drag(event) {
+  if (isDragging) {
+    let currentPosition = 0;
+
+    if (event.type === "touchmove") {
+      currentPosition = event.touches[0].clientX;
+    } else {
+      currentPosition = event.clientX;
+    }
+
+    currentTranslate = prevTranslate + currentPosition - startPosition;
+    checkBoundary(); // Check if the slider is at its boundary
+  }
+}
+
+function checkBoundary() {
+  const minTranslate = -(NUM_CARDS-1) * CARD_WIDTH;
+  const maxTranslate = 0;
+
+  if (currentTranslate > maxTranslate) {
+    currentTranslate = maxTranslate;
+  } else if (currentTranslate < minTranslate) {
+    currentTranslate = minTranslate;
+  }
+}
+
+function dragEnd() {
+  isDragging = false;
+  prevTranslate = currentTranslate;
+}
+
+function updateSliderPosition() {
+  sliderWrapper.style.transform = `translateX(${currentTranslate}px)`;
+  requestAnimationFrame(updateSliderPosition);
+}
+
+updateSliderPosition();
+
+
 function parseDate(date){
     
     return new Date(date);

@@ -11,7 +11,7 @@ export function append(parent, el) {
 //Removing all child elements
 export function removeChildNodes(element){
     while(element.firstChild)
-    {   
+    {  
         element.removeChild(element.firstChild);
     }
 }

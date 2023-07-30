@@ -14,7 +14,7 @@ const mainEl = document.getElementById("main");
 const searchEl = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 
-call.getCity(api.key, api.base, "Veliko Turnovo");
+//call.getCity(api.key, api.base, "Veliko Turnovo");
 
 searchBtn.addEventListener("click", function(){
     call.getCity(api.key, api.base, searchEl.value);
@@ -24,7 +24,7 @@ searchBtn.addEventListener("click", function(){
 
 export function currentWeather(data){
 
-    basic.removeChildNodes(mainEl);
+    //basic.removeChildNodes(mainEl);
 
     const currentWeatherCon = basic.createNode("div");
     const cityWeatherCon = basic.createNode("div"); 
@@ -68,4 +68,18 @@ export function currentWeather(data){
     //console.log(date.getDate());
    
 }
+
+
+//
+
+sliderWrapper.addEventListener("mousedown", dragStart);
+sliderWrapper.addEventListener("touchstart", dragStart);
+sliderWrapper.addEventListener("mouseup", dragEnd);
+sliderWrapper.addEventListener("touchend", dragEnd);
+sliderWrapper.addEventListener("mousemove", drag);
+sliderWrapper.addEventListener("touchmove", drag);
+
+
+specific.updateSliderPosition();
+
 
