@@ -13,6 +13,7 @@ const api = {
 const mainEl = document.getElementById("main");
 const searchEl = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
+const sliderWrapper = document.getElementById("sliderWrapper");
 
 //call.getCity(api.key, api.base, "Veliko Turnovo");
 
@@ -62,24 +63,15 @@ export function currentWeather(data){
     basic.append(weatherIconCon, imgEl);
 
    
-    //const day = Date.parse(date[0]);
-    //console.log(day.getDay());
-    //console.log(typeof date === typeof "");
-    //console.log(date.getDate());
-   
+    
 }
 
 
 //
+const slider = document.getElementById("slider");
+const innerSlider = document.getElementById("slider-inner");
 
-sliderWrapper.addEventListener("mousedown", dragStart);
-sliderWrapper.addEventListener("touchstart", dragStart);
-sliderWrapper.addEventListener("mouseup", dragEnd);
-sliderWrapper.addEventListener("touchend", dragEnd);
-sliderWrapper.addEventListener("mousemove", drag);
-sliderWrapper.addEventListener("touchmove", drag);
-
-
-specific.updateSliderPosition();
-
+slider.addEventListener("mousedown", specific.dragStart);
+window.addEventListener("mouseup", specific.dragEnd);
+slider.addEventListener("mousemove", specific.drag);
 

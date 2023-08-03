@@ -44,71 +44,48 @@ export function getIconLive(data){
     }
 }
 
+
 // Weather slider
-const sliderWrapper = document.getElementById("sliderWrapper");
-let isDragging = false;
-let startPosition = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-const CARD_WIDTH = 67; // Adjust this value based on your card width
-const NUM_CARDS = sliderWrapper.children.length;
-console.log(sliderWrapper.children.length);
+const slider = document.getElementById("slider");
+const innerSlider = document.getElementById("slider-inner");
 
-sliderWrapper.addEventListener("mousedown", dragStart);
-sliderWrapper.addEventListener("touchstart", dragStart);
-sliderWrapper.addEventListener("mouseup", dragEnd);
-sliderWrapper.addEventListener("touchend", dragEnd);
-sliderWrapper.addEventListener("mousemove", drag);
-sliderWrapper.addEventListener("touchmove", drag);
+let pressed = false; 
+let startx;
+let x;
 
-function dragStart(event) {
-  event.preventDefault();
-  isDragging = true;
-
-  if (event.type === "touchstart") {
-    startPosition = event.touches[0].clientX;
-  } else {
-    startPosition = event.clientX;
-  }
+export function dragStart(event){
+    pressed = true;
+    startx = event.offsetX - innerSlider.offsetLeft;
 }
 
-function drag(event) {
-  if (isDragging) {
-    let currentPosition = 0;
+export function dragEnd(){
+    pressed = false;  
+}
 
-    if (event.type === "touchmove") {
-      currentPosition = event.touches[0].clientX;
-    } else {
-      currentPosition = event.clientX;
+export function drag(event){
+    if(!pressed) return;
+    event.preventDefault();
+
+    x = event.offsetX
+
+    innerSlider.style.left = `${x - startx}px`;
+
+    checkBoundary();
+}
+
+
+
+function checkBoundary(){
+    let outer = slider.getBoundingClientRect();
+    let inner = innerSlider.getBoundingClientRect();
+
+    if(parseInt(innerSlider.style.left) > 0){
+        innerSlider.style.left = "0px";
+    }else if(inner.right < outer.right) {
+        innerSlider.style.left = `-${inner.width - outer.width}px`
     }
-
-    currentTranslate = prevTranslate + currentPosition - startPosition;
-    checkBoundary(); // Check if the slider is at its boundary
-  }
 }
 
-function checkBoundary() {
-  const minTranslate = -(NUM_CARDS-1) * CARD_WIDTH;
-  const maxTranslate = 0;
-
-  if (currentTranslate > maxTranslate) {
-    currentTranslate = maxTranslate;
-  } else if (currentTranslate < minTranslate) {
-    currentTranslate = minTranslate;
-  }
-}
-
-function dragEnd() {
-  isDragging = false;
-  prevTranslate = currentTranslate;
-}
-
-function updateSliderPosition() {
-  sliderWrapper.style.transform = `translateX(${currentTranslate}px)`;
-  requestAnimationFrame(updateSliderPosition);
-}
-
-updateSliderPosition();
 
 
 function parseDate(date){

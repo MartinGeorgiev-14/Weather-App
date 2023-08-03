@@ -70,38 +70,42 @@ header #search-btn{
 
 /* Start Hourly Weather Slider */
 
-.center-container{
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-}
-  
-.hourly-weahter-slider {
-    width: 100%;
-    max-width: 85%;
-    overflow: hidden;
-    display: flex;
-    background-color: var(--containerBackground);
-    border-radius: 0.5rem;
-}
-  
-.hourly-weahter-slider:active{
-    background-color: red;
+
+.chance-icon{
+   
 }
 
-.slider-wrapper {
-    display: flex;
-    transition: transform 0.3s ease;
+
+#slider {
+    position: relative;
+    left: 10%;
+    width: 80%;
+    height: 10rem;
+    margin-top: 1rem;
+    overflow: hidden;
+    background-color: var(--containerBackground);
+} 
+
+#slider-inner {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: max-content;
+    display: grid;
+    grid-template-columns: repeat(24, 3fr);
+    pointer-events: none;
     
 }
-  
-.card {
-    min-width: 5%;
-    color: white;
-    font-size: 1rem;
-    text-align: center;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+
+.slide-info p {
+    color: var(--fontWhite);
+    font-size: 1.2rem;
+    pointer-events: auto;
 }
-  
+
+.slide-info {
+    height: 100%;
+    text-align: center;
+}
 /* End Hourly Weather Slider */
