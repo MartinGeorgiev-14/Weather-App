@@ -76,3 +76,6 @@ slider.addEventListener("mousedown", specific.dragStart);
 window.addEventListener("mouseup", specific.dragEnd);
 slider.addEventListener("mousemove", specific.drag);
 
+slider.addEventListener("touchstart", specific.dragStart);
+window.addEventListener("touchend", specific.dragEnd);
+slider.addEventListener("touchmove", specific.drag);
