@@ -71,6 +71,7 @@ export function currentWeather(data){
 const slider = document.getElementById("slider");
 const innerSlider = document.getElementById("slider-inner");
 
+slider.addEventListener("mouseenter", specific.mouseEnter);
 slider.addEventListener("mousedown", specific.dragStart);
 window.addEventListener("mouseup", specific.dragEnd);
 slider.addEventListener("mousemove", specific.drag);

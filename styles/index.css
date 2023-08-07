@@ -70,12 +70,6 @@ header #search-btn{
 
 /* Start Hourly Weather Slider */
 
-
-.chance-icon{
-   
-}
-
-
 #slider {
     position: relative;
     left: 10%;
@@ -84,6 +78,8 @@ header #search-btn{
     margin-top: 1rem;
     overflow: hidden;
     background-color: var(--containerBackground);
+    border-radius: 0.5rem;
+    user-select: none;
 } 
 
 #slider-inner {
@@ -107,5 +103,9 @@ header #search-btn{
 .slide-info {
     height: 100%;
     text-align: center;
+}
+
+.chance-icon span{
+    font-size: 0.9rem;
 }
 /* End Hourly Weather Slider */

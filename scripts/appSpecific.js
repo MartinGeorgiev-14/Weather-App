@@ -1,5 +1,15 @@
 import * as iconInfo from "./iconInfo.js";
 
+const containerBackground = "#5B9BE3";
+const containerBackgroundHovered = "#7AADE6"
+
+const slider = document.getElementById("slider");
+const innerSlider = document.getElementById("slider-inner");
+
+let pressed = false; 
+let startx;
+let x;
+
 export function getDay(date){
     
     const newDate = parseDate(date);
@@ -46,20 +56,19 @@ export function getIconLive(data){
 
 
 // Weather slider
-const slider = document.getElementById("slider");
-const innerSlider = document.getElementById("slider-inner");
-
-let pressed = false; 
-let startx;
-let x;
+export function mouseEnter(){
+    slider.style.cursor = "grab";
+}
 
 export function dragStart(event){
     pressed = true;
     startx = event.offsetX - innerSlider.offsetLeft;
+    slider.style.cursor = "grabbing";
 }
 
 export function dragEnd(){
-    pressed = false;  
+    pressed = false;
+    slider.style.cursor = "grab";
 }
 
 export function drag(event){
