@@ -21,7 +21,15 @@ export function getDay(date){
 export function getHours(date){
 
     const newDate = parseDate(date);
-    return newDate.getHours();
+    const hours = newDate.getHours();
+    
+    if(hours >= 10){
+        return hours;
+    }
+    else{
+        return "0" + hours;
+    }
+    
 }
 
 export function getMinutes(date){
@@ -36,7 +44,7 @@ export function getMinutes(date){
     }
     
 }
-
+//Function that retur icon based on time and weather condition
 export function getIconLive(data){
 
     const timeNow = extractTime(data.location.localtime);
@@ -54,7 +62,23 @@ export function getIconLive(data){
     }
 }
 
+export function getHourlyIcon(data, index){
+    const timeThen = extractTime(data.forecast.forecastday[0].hour[index].time);
+    const sunrise = convertTime12to24(data.forecast.forecastday[0].astro.sunrise);
+    const sunset = convertTime12to24(data.forecast.forecastday[0].astro.sunset);
+    const code = data.forecast.forecastday[0].hour[index].condition.code;
+    const find = iconInfo.iconInfoStorage.find(item => item.code === code);
+ 
+    if(timeThen > sunrise && timeThen < sunset){
+        
+        return `icons/day/${find.icon}.png`
+    }
+    else{
+        return `icons/night/${find.icon}.png`
+    }
+}
 
+//Functiont that parses string to a Date
 function parseDate(date){
     
     return new Date(date);
@@ -75,7 +99,7 @@ function convertTime12to24(time12h){
   
     return `${hours}:${minutes}`;
 }
-
+//Function that extracts the time from a string ex -> "2023-08-10 14:00" => "14:00";
 function extractTime(dateTimeString) {
     
     const [datePart, timePart] = dateTimeString.split(' ');
@@ -83,3 +107,4 @@ function extractTime(dateTimeString) {
     
     return timePart;
 }
+

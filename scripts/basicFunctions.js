@@ -35,3 +35,6 @@ export function setSrcAttribute(elem, location){
     elem.setAttribute("src", location);
 }
 
+export function setClassAttribute(elem, value){
+    elem.setAttribute("class", value);
+}
