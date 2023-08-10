@@ -55,48 +55,6 @@ export function getIconLive(data){
 }
 
 
-// Weather slider
-export function mouseEnter(){
-    slider.style.cursor = "grab";
-}
-
-export function dragStart(event){
-    pressed = true;
-    startx = event.offsetX - innerSlider.offsetLeft;
-    slider.style.cursor = "grabbing";
-}
-
-export function dragEnd(){
-    pressed = false;
-    slider.style.cursor = "grab";
-}
-
-export function drag(event){
-    if(!pressed) return;
-    event.preventDefault();
-
-    x = event.offsetX
-
-    innerSlider.style.left = `${x - startx}px`;
-
-    checkBoundary();
-}
-
-
-
-function checkBoundary(){
-    let outer = slider.getBoundingClientRect();
-    let inner = innerSlider.getBoundingClientRect();
-
-    if(parseInt(innerSlider.style.left) > 0){
-        innerSlider.style.left = "0px";
-    }else if(inner.right < outer.right) {
-        innerSlider.style.left = `-${inner.width - outer.width}px`
-    }
-}
-
-
-
 function parseDate(date){
     
     return new Date(date);

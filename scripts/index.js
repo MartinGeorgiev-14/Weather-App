@@ -13,7 +13,7 @@ const api = {
 const mainEl = document.getElementById("main");
 const searchEl = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
-const sliderWrapper = document.getElementById("sliderWrapper");
+
 
 //call.getCity(api.key, api.base, "Veliko Turnovo");
 
@@ -67,15 +67,5 @@ export function currentWeather(data){
 }
 
 
-//
-const slider = document.getElementById("slider");
-const innerSlider = document.getElementById("slider-inner");
 
-slider.addEventListener("mouseenter", specific.mouseEnter);
-slider.addEventListener("mousedown", specific.dragStart);
-window.addEventListener("mouseup", specific.dragEnd);
-slider.addEventListener("mousemove", specific.drag);
-
-slider.addEventListener("touchstart", specific.dragStart);
-window.addEventListener("touchend", specific.dragEnd);
-slider.addEventListener("touchmove", specific.drag);
+// vasko kaza da izpolzvam scroll ??

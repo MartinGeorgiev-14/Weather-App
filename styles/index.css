@@ -28,6 +28,13 @@ header h1{
     color: var(--fontWhite);
 }
 
+header i {
+    position: absolute;
+    
+    min-width: 40px;
+    
+}
+
 header #search-input{
     background-color: var(--fontWhite);
     border: none;
@@ -74,24 +81,19 @@ header #search-btn{
     position: relative;
     left: 10%;
     width: 80%;
-    height: 10rem;
+    height: auto;
     margin-top: 1rem;
     overflow: hidden;
     background-color: var(--containerBackground);
     border-radius: 0.5rem;
     user-select: none;
+    
 } 
 
-#slider-inner {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: max-content;
-    display: grid;
-    grid-template-columns: repeat(24, 3fr);
-    pointer-events: none;
-    
+#slider-inner{
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
 }
 
 .slide-info p {
