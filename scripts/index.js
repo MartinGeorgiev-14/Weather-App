@@ -106,7 +106,7 @@ export function currentWeather(data){
 
 
    
-    //Creating weakly weather forecast
+    //Creating weekly weather forecast
     const daysCon = basic.createNode("div");
 
     basic.setIdAttribute(daysCon, "days-container");
@@ -134,8 +134,7 @@ export function currentWeather(data){
         basic.setClassAttribute(imgCon, "img-container");
         basic.setClassAttribute(secondDayInfo, "second-info-day");
 
-        basic.setInnerHTML(day, specific.getDay(data.forecast.forecastday[i].date));
-        //${data.forecast.forecastday[0].hour[i]["chance_of_rain"]}%</span>
+        basic.setInnerHTML(day, specific.getWeeklyDays(data.forecast.forecastday[i].date));
         basic.setInnerHTML(iconCon, `<span><i class="fa-solid fa-droplet"></i> ${data.forecast.forecastday[i].day["daily_chance_of_rain"]}%</span>`)
         basic.setSrcAttribute(img, specific.getDailyIcon(data, i));
         basic.setInnerHTML(highDeg, `${Math.floor(data.forecast.forecastday[i].day["maxtemp_c"])}°`);

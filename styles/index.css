@@ -138,28 +138,33 @@ header #search-btn{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 60%;
-    
+    min-width: 60%;
+}
+
+.day{
+    width: 100%;
 }
 
 .daily-chance-icon{
     font-size: 0.9rem;
-    width: 20%;
+    min-width: 20%;
+    margin-right: 1rem;
+    white-space: nowrap;
 }
 
 .img-container{
     display: flex;
     justify-content: center;
     width: 20%;
-    
 }
 
 .second-info-day{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 20%;
-    
+    justify-content: center;
+    gap: 30%;
+    width: 100%;
+
 }
 
 .first-info-day .day, .second-info-day p{

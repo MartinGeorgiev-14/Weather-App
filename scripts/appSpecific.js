@@ -1,21 +1,25 @@
 import * as iconInfo from "./iconInfo.js";
 
-const containerBackground = "#5B9BE3";
-const containerBackgroundHovered = "#7AADE6"
-
-const slider = document.getElementById("slider");
-const innerSlider = document.getElementById("slider-inner");
-
-let pressed = false; 
-let startx;
-let x;
-
-export function getDay(date){
+export function getWeeklyDays(date){
     
     const newDate = parseDate(date);
+    const today = extractDateDate(new Date());
+    const newDateString = extractDateDate(newDate);
+
+    if(today === newDateString){
+        return "Today"
+    }
+
     const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     return daysInWeek[newDate.getDay()];
 
+}
+
+export function getDay(date){
+    const newDate = parseDate(date);
+
+    const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return daysInWeek[newDate.getDay()];
 }
 
 export function getHours(date){
@@ -79,9 +83,7 @@ export function getHourlyIcon(data, index){
 }
 
 export function getDailyIcon(data, index){
-    //const timeThen = extractTime(data.forecast.forecastday[index].hour[index].time);
-    //const sunrise = convertTime12to24(data.forecast.forecastday[0].astro.sunrise);
-    //const sunset = convertTime12to24(data.forecast.forecastday[0].astro.sunset);
+
     const code = data.forecast.forecastday[index].day.condition.code;
     const find = iconInfo.iconInfoStorage.find(item => item.code === code);
   
@@ -118,4 +120,14 @@ function extractTime(dateTimeString) {
     
     return timePart;
 }
+//Function that extracts the day, mouth and year into a single string -> Thu Aug 17 2023 19:07:32 => "2-8-2023";
+function extractDateDate(date)
+{
+    const day = date.getDay();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
 
+    const joined = [day, month, year].join("-");
+
+    return joined;
+}
