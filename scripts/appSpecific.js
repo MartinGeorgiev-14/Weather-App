@@ -78,6 +78,17 @@ export function getHourlyIcon(data, index){
     }
 }
 
+export function getDailyIcon(data, index){
+    //const timeThen = extractTime(data.forecast.forecastday[index].hour[index].time);
+    //const sunrise = convertTime12to24(data.forecast.forecastday[0].astro.sunrise);
+    //const sunset = convertTime12to24(data.forecast.forecastday[0].astro.sunset);
+    const code = data.forecast.forecastday[index].day.condition.code;
+    const find = iconInfo.iconInfoStorage.find(item => item.code === code);
+  
+    return `icons/day/${find.icon}.png`
+   
+}
+
 //Functiont that parses string to a Date
 function parseDate(date){
     

@@ -55,7 +55,15 @@ header #search-btn{
 
 /* Header End */
 
+/* Start all containers center*/
 
+#containers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* End all containers center*/
 
 /* Start Current Weather */
 
@@ -78,8 +86,6 @@ header #search-btn{
 /* Start Hourly Weather Slider */
 
 #slider {
-    position: relative;
-    left: 10%;
     width: 80%;
     height: auto;
     margin-top: 1rem;
@@ -87,7 +93,6 @@ header #search-btn{
     background-color: var(--containerBackground);
     border-radius: 0.5rem;
     user-select: none;
-    
 } 
 
 #slider-inner{
@@ -111,3 +116,59 @@ header #search-btn{
     font-size: 0.9rem;
 }
 /* End Hourly Weather Slider */
+
+/* Start Daily Weather Container */
+
+#days-container{
+    border-radius: 0.5rem;
+    width: 80%;
+    background-color: var(--containerBackground);
+    color: var(--fontWhite);
+    margin-top: 1rem;
+    user-select: none;
+}
+
+.day-info{
+    display: flex;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+}
+
+.first-info-day{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    
+}
+
+.daily-chance-icon{
+    font-size: 0.9rem;
+    width: 20%;
+}
+
+.img-container{
+    display: flex;
+    justify-content: center;
+    width: 20%;
+    
+}
+
+.second-info-day{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+    
+}
+
+.first-info-day .day, .second-info-day p{
+    font-weight: bold;
+}
+
+.day-info img {
+    height: 2.5rem;
+}
+
+
+/* End Daily Weather Container */

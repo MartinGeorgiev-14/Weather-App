@@ -3,7 +3,7 @@ import * as index from "./index.js";
 export async function getCity(key, base, value)
     {
         let isValid = false;
-        const response = await fetch(`${base}forecast.json?key=${key}&q=${value}&days=$7&aqi=no&alerts=no`);
+        const response = await fetch(`${base}forecast.json?key=${key}&q=${value}&days=7&aqi=no&alerts=no`);
         const responseData = await response.json();
 
         isValid = checkValue(value);
