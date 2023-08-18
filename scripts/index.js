@@ -105,7 +105,7 @@ export function currentWeather(data){
     }
 
 
-   
+    
     //Creating weekly weather forecast container
     const daysCon = basic.createNode("div");
 
@@ -153,7 +153,7 @@ export function currentWeather(data){
 
     }
     
-    const obj = [{
+    const infoObj = [{
         title: "UV index",
         stat: specific.getUvCondition(data),
         icon: "fa-solid fa-sun"
@@ -172,24 +172,32 @@ export function currentWeather(data){
         icon: "fa-regular fa-sun",
         riseTitle: "Sunrise",
         riseStat: specific.convertTime12to24(data.forecast.forecastday[0].astro.sunrise),
-        downTitle: "Sundown",
-        downStat: specific.convertTime12to24(data.forecast.forecastday[0].astro.sundown)
+        setTitle: "Sunset",
+        setStat: specific.convertTime12to24(data.forecast.forecastday[0].astro.sunset)
+    }];
 
-    }
-    ]
-    console.log(obj[3].riseStat);
-   
     const additionalInfoCon = basic.createNode("div");
-    const infoContainers = [];
+  
     for(let i = 0; i < 4; i++){
         const div = basic.createNode("div");
-        
-        basic.setClassAttribute(div, "info-container");
+        const icon = basic.createNode("i");
+        const title = basic.createNode("p");
+        const stat = basic.createNode("p");
 
-        infoContainers.push(div);
+        basic.setClassAttribute(div, "info-container");
+        basic.setClassAttribute(title, "info-title");
+
+        basic.setClassAttribute(icon, infoObj[i].icon);
+        basic.setInnerHTML(title, infoObj[i].title);
+        basic.setInnerHTML(stat, infoObj[i].stat);
+
+        basic.append(additionalInfoCon, div);
+        basic.append(div, icon);
+        basic.append(div, title);
+        basic.append(div, stat);
     }
     
-    console.log(obj[0].title)
+    basic.append(containersContainer, additionalInfoCon)
 }
 
 
