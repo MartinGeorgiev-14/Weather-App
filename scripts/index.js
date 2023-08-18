@@ -56,11 +56,11 @@ export function currentWeather(data){
     basic.setIdAttribute(sliderInnerCon, "slider-inner");
     //Setting the text inside current weather container elements
     basic.setInnerHTML(cityNameEl, data.location.name);
-    basic.setInnerHTML(degEl, `${Math.floor(data.current["temp_c"])}°`);
+    basic.setInnerHTML(degEl, `${Math.round(data.current["temp_c"])}°`);
     basic.setInnerHTML(conditionEl, data.current.condition.text);
-    basic.setInnerHTML(feelsEl, `${Math.floor(data.forecast.forecastday[0].day["mintemp_c"])}° / 
-    ${Math.floor(data.forecast.forecastday[0].day["maxtemp_c"])}° feels like 
-    ${Math.floor(data.current["feelslike_c"])}°`);
+    basic.setInnerHTML(feelsEl, `${Math.round(data.forecast.forecastday[0].day["mintemp_c"])}° / 
+    ${Math.round(data.forecast.forecastday[0].day["maxtemp_c"])}° feels like 
+    ${Math.round(data.current["feelslike_c"])}°`);
     basic.setInnerHTML(dateEl, `${specific.getDay(data.location.localtime)}
     ${specific.getHours(data.location.localtime)}:${specific.getMinutes(data.location.localtime)}`);
     basic.setSrcAttribute(imgEl, specific.getIconLive(data));
@@ -91,10 +91,10 @@ export function currentWeather(data){
 
         basic.setClassAttribute(hourSlide, "slide-info");
         basic.setClassAttribute(chance, "chance-icon");
-
+    
         basic.setInnerHTML(time, `${specific.getHours(data.forecast.forecastday[0].hour[i].time)}:${specific.getMinutes(data.forecast.forecastday[0].hour[i].time)}`);
         basic.setSrcAttribute(icon, specific.getHourlyIcon(data, i));
-        basic.setInnerHTML(degrees, `${Math.floor(data.forecast.forecastday[0].hour[i]["temp_c"])}°`);
+        basic.setInnerHTML(degrees, `${Math.round(data.forecast.forecastday[0].hour[i]["temp_c"])}°`);
         basic.setInnerHTML(chance, `<span><i class="fa-solid fa-droplet"></i> ${data.forecast.forecastday[0].hour[i]["chance_of_rain"]}%</span>`)
 
         basic.append(sliderInnerCon, hourSlide);
@@ -106,7 +106,7 @@ export function currentWeather(data){
 
 
    
-    //Creating weekly weather forecast
+    //Creating weekly weather forecast container
     const daysCon = basic.createNode("div");
 
     basic.setIdAttribute(daysCon, "days-container");
@@ -137,8 +137,8 @@ export function currentWeather(data){
         basic.setInnerHTML(day, specific.getWeeklyDays(data.forecast.forecastday[i].date));
         basic.setInnerHTML(iconCon, `<span><i class="fa-solid fa-droplet"></i> ${data.forecast.forecastday[i].day["daily_chance_of_rain"]}%</span>`)
         basic.setSrcAttribute(img, specific.getDailyIcon(data, i));
-        basic.setInnerHTML(highDeg, `${Math.floor(data.forecast.forecastday[i].day["maxtemp_c"])}°`);
-        basic.setInnerHTML(lowDeg, `${Math.floor(data.forecast.forecastday[i].day["mintemp_c"])}°`);
+        basic.setInnerHTML(highDeg, `${Math.round(data.forecast.forecastday[i].day["maxtemp_c"])}°`);
+        basic.setInnerHTML(lowDeg, `${Math.round(data.forecast.forecastday[i].day["mintemp_c"])}°`);
 
         
         basic.append(daysCon, dayInfo);
@@ -153,7 +153,43 @@ export function currentWeather(data){
 
     }
     
+    const obj = [{
+        title: "UV index",
+        stat: specific.getUvCondition(data),
+        icon: "fa-solid fa-sun"
+    },
+    {
+        title: "Humidity",
+        stat: data.current.humidity,
+        icon: "fa-solid fa-droplet droplet"
+    },
+    {
+        title: "Wind",
+        stat: Math.round(data.current["wind_kph"]),
+        icon: "fa-solid fa-wind"
+    },
+    {
+        icon: "fa-regular fa-sun",
+        riseTitle: "Sunrise",
+        riseStat: specific.convertTime12to24(data.forecast.forecastday[0].astro.sunrise),
+        downTitle: "Sundown",
+        downStat: specific.convertTime12to24(data.forecast.forecastday[0].astro.sundown)
+
+    }
+    ]
+    console.log(obj[3].riseStat);
+   
+    const additionalInfoCon = basic.createNode("div");
+    const infoContainers = [];
+    for(let i = 0; i < 4; i++){
+        const div = basic.createNode("div");
+        
+        basic.setClassAttribute(div, "info-container");
+
+        infoContainers.push(div);
+    }
     
+    console.log(obj[0].title)
 }
 
 

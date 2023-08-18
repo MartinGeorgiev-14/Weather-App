@@ -91,15 +91,24 @@ export function getDailyIcon(data, index){
    
 }
 
+export function getUvCondition(data){
+    const score = data.current.uv;
+
+    return score < 3 ? "Low" :
+    score < 6 ? "Moderate" :
+    score < 8 ? "High" :
+    score < 11 ? "Very High" : "Extreme" 
+}
+
 //Functiont that parses string to a Date
 function parseDate(date){
     
     return new Date(date);
 }
 
-function convertTime12to24(time12h){
+export function convertTime12to24(time12h){
     const [time, modifier] = time12h.split(' ');
-  
+    
     let [hours, minutes] = time.split(':');
   
     if (hours === '12') {
@@ -109,7 +118,7 @@ function convertTime12to24(time12h){
     if (modifier === 'PM') {
       hours = parseInt(hours, 10) + 12;
     }
-  
+    
     return `${hours}:${minutes}`;
 }
 //Function that extracts the time from a string ex -> "2023-08-10 14:00" => "14:00";
