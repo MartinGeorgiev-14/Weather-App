@@ -215,6 +215,7 @@ header #search-btn{
     align-items: center;
     padding: 1rem;
     border-radius: 0.5rem;
+    user-select: none;
 }
 
 .info-title{

@@ -20,7 +20,14 @@ call.getCity(api.key, api.base, "Veliko Turnovo");
 searchBtn.addEventListener("click", function(){
     call.getCity(api.key, api.base, searchEl.value);
     searchEl.value = "";
-})
+});
+
+searchEl.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        call.getCity(api.key, api.base, searchEl.value);
+        searchEl.value = "";
+    }
+});
 
 
 export function currentWeather(data){
