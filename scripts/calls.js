@@ -31,7 +31,7 @@ export async function getCity(key, base, value)
             alert(error);
         }
     }
-
+    //Checks if there the input is empty or it has numbers
     function checkValue(inputValue){
         const digits = /\d/;
         const splited = inputValue.split("");
