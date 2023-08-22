@@ -13,7 +13,12 @@ const api = {
 const mainEl = document.getElementById("main");
 const searchEl = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
+const colorButton = document.getElementById("color-mode");
+const root = document.querySelector(":root");
+let colorMode = false; //true for light / false for dark
 
+//Calling the function for saved color mode
+colorSave();
 //calling get request wtih hardcoded value
 call.getCity(api.key, api.base, "Veliko Turnovo");
 
@@ -28,8 +33,44 @@ searchEl.addEventListener("keydown", function(event){
         searchEl.value = "";
     }
 });
+//Event listener for color mode (light/dark)
+colorButton.addEventListener("click", function(){
+    
+    const colors = [
+        {   //Light colors
+            bodyBackground: "#7CB3F4",
+            fontColor: "#F2FBF8",
+            containerBackground: "#5B9BE3",
+            icon: "fa-regular fa-sun",
+            mode: false
+        },
+        {   //Dark colors
+            bodyBackground: "#010101",
+            fontColor: "#F8F8F8",
+            containerBackground: "#161616",
+            icon: "fa-regular fa-moon",
+            mode: true
+        }
+    ]
 
-
+    if(colorMode){
+        basic.setClassAttribute(colorButton, colors[0].icon);
+        root.style.setProperty("--bodyBackground", colors[0].bodyBackground);
+        root.style.setProperty("--fontColor", colors[0].fontColor);
+        root.style.setProperty("--containerBackground", colors[0].containerBackground);
+        localStorage.setItem("colors", JSON.stringify(colors[0]));
+        colorMode = false;
+    }
+    else{
+        basic.setClassAttribute(colorButton, colors[1].icon);
+        root.style.setProperty("--bodyBackground", colors[1].bodyBackground);
+        root.style.setProperty("--fontColor", colors[1].fontColor);
+        root.style.setProperty("--containerBackground", colors[1].containerBackground);
+        localStorage.setItem("colors", JSON.stringify(colors[1]));
+        colorMode = true;
+    }
+});
+//Main function
 export function currentWeather(data){
     //Removes all nodes in main
     basic.removeChildNodes(mainEl);
@@ -254,7 +295,26 @@ export function currentWeather(data){
     };
    
     basic.append(containersContainer, additionalInfoCon);
+
+    const updatedAt = document.getElementById("updated-at");
+    basic.setInnerHTML(updatedAt, data.current["last_updated"]);
+
 }
 
+//Loads the saved mode/colors for the site
+function colorSave(){
+    const colors = JSON.parse(localStorage.getItem("colors"));
+
+    if(colors){
+        root.style.setProperty("--bodyBackground", colors.bodyBackground);
+        root.style.setProperty("--fontColor", colors.fontColor);
+        root.style.setProperty("--containerBackground", colors.containerBackground);
+        basic.setClassAttribute(colorButton, colors.icon);
+        colorMode = colors.mode;
+    }
+    else {
+        return;
+    }
+}
 
 

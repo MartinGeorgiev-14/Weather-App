@@ -16,20 +16,29 @@
 <body>
     <header>
         <h1>Weahter Vision</h1>
-        <input id="search-input" type="text" placeholder="City">
-
-        <input type="submit"  id="search-btn" value="Search">
+        <i id="color-mode" class="fa-regular fa-sun"></i>
+        <div id="search-container">
             
+            <input id="search-input" type="text" placeholder="City">
+            <input id="search-btn" type="submit" value="Search">
+        </div>
+        
         
     </header>
     
     <main id="main">
-       
-    <div id="containers">
-   
-    </div>
-    
+        <div id="containers">
+        </div>
     </main>
+
+    <footer>
+        
+            <div id="footer-container">
+                <p>Made by Martin</p>
+                <p>Updated at: <span id="updated-at"></span></p>
+            </div>
+        
+    </footer>
 
     <script src="scripts\iconInfo.js" type="module"></script>
     <script src="scripts\calls.js" type="module"></script>
