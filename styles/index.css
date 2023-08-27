@@ -187,13 +187,13 @@ header #search-btn{
     background-color: var(--hoverBackground);    
 }
 
-.day-info:hover:first-child{
+.day-info:hover:first-child, .slected-slide:first-child{
     background-color: var(--hoverBackground);
     border-top-left-radius: 0.5rem;   
     border-top-right-radius: 0.5rem;
 }
 
-.day-info:hover:last-child{
+.day-info:hover:last-child, .slected-slide:last-child{
     background-color: var(--hoverBackground);
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
