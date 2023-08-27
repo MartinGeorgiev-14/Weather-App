@@ -2,6 +2,7 @@ import * as basic from "./basicFunctions.js";
 import * as call from "./calls.js";
 import * as specific from "./appSpecific.js";
 
+
 const api = {
     key: "c836ad97ddf247c3bb9162714231907",
     base: "https://api.weatherapi.com/v1/"
@@ -9,7 +10,7 @@ const api = {
 
 // https://api.weatherapi.com/v1/forecast.json?key=c836ad97ddf247c3bb9162714231907&q=Veliko Turnovo&days=1&aqi=no&alerts=no
 // `${api.base}forecast.json?key={$api.key}&q=${SearchBoxValue}&days=$7&aqi=no&alerts=no`
-
+export let searchedCity = "Veliko Turnovo";
 const mainEl = document.getElementById("main");
 const searchEl = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
@@ -24,6 +25,7 @@ call.getCity(api.key, api.base, "Veliko Turnovo");
 
 searchBtn.addEventListener("click", function(){
     call.getCity(api.key, api.base, searchEl.value);
+    searchedCity = searchEl.value;
     searchEl.value = "";
 });
 
@@ -41,6 +43,7 @@ colorButton.addEventListener("click", function(){
             bodyBackground: "#7CB3F4",
             fontColor: "#F2FBF8",
             containerBackground: "#5B9BE3",
+            hoverBackground: "#7AADE6",
             icon: "fa-regular fa-sun",
             mode: false
         },
@@ -48,24 +51,28 @@ colorButton.addEventListener("click", function(){
             bodyBackground: "#010101",
             fontColor: "#F8F8F8",
             containerBackground: "#161616",
+            hoverBackground: "#464646",
             icon: "fa-regular fa-moon",
             mode: true
         }
     ]
-
+    //Light mode
     if(colorMode){
         basic.setClassAttribute(colorButton, colors[0].icon);
         root.style.setProperty("--bodyBackground", colors[0].bodyBackground);
         root.style.setProperty("--fontColor", colors[0].fontColor);
         root.style.setProperty("--containerBackground", colors[0].containerBackground);
+        root.style.setProperty("--hoverBackground", colors[0].hoverBackground);
         localStorage.setItem("colors", JSON.stringify(colors[0]));
         colorMode = false;
     }
-    else{
+    //Dark mode
+    else{   
         basic.setClassAttribute(colorButton, colors[1].icon);
         root.style.setProperty("--bodyBackground", colors[1].bodyBackground);
         root.style.setProperty("--fontColor", colors[1].fontColor);
         root.style.setProperty("--containerBackground", colors[1].containerBackground);
+        root.style.setProperty("--hoverBackground", colors[1].hoverBackground);
         localStorage.setItem("colors", JSON.stringify(colors[1]));
         colorMode = true;
     }
@@ -86,6 +93,7 @@ export function currentWeather(data){
     const dateEl = basic.createNode("p");
     const weatherIconCon = basic.createNode("div");
     const imgEl = basic.createNode("img");
+    const currentButton = basic.createNode("button");
 
     //Setting attribute to the main container
     basic.setIdAttribute(containersContainer, "containers");
@@ -93,8 +101,8 @@ export function currentWeather(data){
     //Setting attributes to all current weather container elements
     basic.setIdAttribute(currentWeatherCon, "current-weather-container");
     basic.setIdAttribute(cityWeatherCon, "city-weather");
-    basic.setIdAttribute(weatherIconCon, "weather-icon-holder");
-    basic.setIdAttribute(imgEl, "weather-icon-holder");
+    basic.setIdAttribute(weatherIconCon, "weather-icon-button-holder");
+    basic.setIdAttribute(imgEl, "weather-icon-button-holder");
 
     //Setting the text inside current weather container elements
     basic.setInnerHTML(cityNameEl, data.location.name);
@@ -106,6 +114,7 @@ export function currentWeather(data){
     basic.setInnerHTML(dateEl, `${specific.getDay(data.location.localtime)}
     ${specific.getHours(data.location.localtime)}:${specific.getMinutes(data.location.localtime)}`);
     basic.setSrcAttribute(imgEl, specific.getIconLive(data));
+    basic.setInnerHTML(currentButton, "Current weather");
     //Appending all current weather container elements
     basic.append(mainEl, currentWeatherCon);
     basic.append(currentWeatherCon, cityWeatherCon);
@@ -116,8 +125,15 @@ export function currentWeather(data){
     basic.append(cityWeatherCon, dateEl);
     basic.append(currentWeatherCon, weatherIconCon);
     basic.append(weatherIconCon, imgEl);
+    basic.append(weatherIconCon, currentButton);
     //Appending the main container to main
     basic.append(mainEl, containersContainer);
+
+    currentButton.addEventListener("click", function(){
+        
+        call.getCity(api.key, api.base, searchedCity);
+        
+    });
 
     //Creating all elements for hourly weather slider
     const sliderCon = basic.createNode("div");
@@ -151,11 +167,11 @@ export function currentWeather(data){
         basic.append(hourSlide, icon);
         basic.append(hourSlide, degrees);
         basic.append(hourSlide, chance);
-        
+    //Checks for selected element and updated the weather stats on clicked element    
         hourSlide.addEventListener("click", function(){
-           if(sliderCon.querySelector(".slected-slide"))
+           if(sliderInnerCon.querySelector(".slected-slide"))
             {
-                const removeSelectedClass = sliderCon.querySelector(".slected-slide");
+                const removeSelectedClass = sliderInnerCon.querySelector(".slected-slide");
                 basic.removeClassAttribute(removeSelectedClass, "slected-slide");
             }
            
@@ -212,11 +228,19 @@ export function currentWeather(data){
         basic.append(dayInfo, secondDayInfo);
         basic.append(secondDayInfo, highDeg);
         basic.append(secondDayInfo, lowDeg);
-
+//Checks for selected element and updated the weather stats on clicked element    
         dayInfo.addEventListener("click", function(){
+
             dayNum = i;
-            
-        })
+            if(daysCon.querySelector(".slected-slide"))
+            {
+                const removeSelectedClass = daysCon.querySelector(".slected-slide");
+                basic.removeClassAttribute(removeSelectedClass, "slected-slide");
+            }
+
+            specific.updateHourlyWeather(data, i);
+            basic.addClassAttribute(dayInfo, "slected-slide");
+        });
     }
     
     //Array that contains object with info about each element
@@ -327,6 +351,7 @@ function colorSave(){
         root.style.setProperty("--bodyBackground", colors.bodyBackground);
         root.style.setProperty("--fontColor", colors.fontColor);
         root.style.setProperty("--containerBackground", colors.containerBackground);
+        root.style.setProperty("--hoverBackground", colors.hoverBackground);
         basic.setClassAttribute(colorButton, colors.icon);
         colorMode = colors.mode;
     }

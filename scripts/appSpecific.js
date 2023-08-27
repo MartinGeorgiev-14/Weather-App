@@ -1,5 +1,12 @@
 import * as iconInfo from "./iconInfo.js";
 import * as basic from "./basicFunctions.js";
+import * as call from "./calls.js";
+import * as index from "./index.js";
+
+const api = {
+    key: "c836ad97ddf247c3bb9162714231907",
+    base: "https://api.weatherapi.com/v1/"
+}
 
 export function getWeeklyDays(date){
     
@@ -139,11 +146,11 @@ export function convertTime12to24(time12h){
     
     return `${hours}:${minutes}`;
 }
-
+//Function that displays the weather for specific hour
 export function getSpecificWeatherHour(data, hour, day)
 {
     const currentWeatherCon = document.getElementById("current-weather-container");
-    console.log(data.forecast.forecastday[day].hour[hour]["temp_c"]);
+    console.log(`hour:${hour} day:${day}`);
     basic.removeChildNodes(currentWeatherCon);
 
         //Creating all elements for current weather container
@@ -155,12 +162,13 @@ export function getSpecificWeatherHour(data, hour, day)
         const dateEl = basic.createNode("p");
         const weatherIconCon = basic.createNode("div");
         const imgEl = basic.createNode("img");
-    
+        const currentButton = basic.createNode("button");
+
         //Setting attributes to all current weather container elements
         basic.setIdAttribute(currentWeatherCon, "current-weather-container");
         basic.setIdAttribute(cityWeatherCon, "city-weather");
-        basic.setIdAttribute(weatherIconCon, "weather-icon-holder");
-        basic.setIdAttribute(imgEl, "weather-icon-holder");
+        basic.setIdAttribute(weatherIconCon, "weather-icon-button-holder");
+        basic.setIdAttribute(imgEl, "weather-icon-button-holder");
     
         //Setting the text inside current weather container elements
         basic.setInnerHTML(cityNameEl, data.location.name);
@@ -172,6 +180,7 @@ export function getSpecificWeatherHour(data, hour, day)
         basic.setInnerHTML(dateEl, `${getDay(data.forecast.forecastday[day].hour[hour].time)}
         ${getHours(data.forecast.forecastday[day].hour[hour].time)}:${getMinutes(data.forecast.forecastday[day].hour[hour].time)}`);
         basic.setSrcAttribute(imgEl, getIconDayHour(data, hour, day));
+        basic.setInnerHTML(currentButton, "Current weather");
         //Appending all current weather container elements
         basic.append(currentWeatherCon, cityWeatherCon);
         basic.append(cityWeatherCon, cityNameEl);
@@ -181,7 +190,56 @@ export function getSpecificWeatherHour(data, hour, day)
         basic.append(cityWeatherCon, dateEl);
         basic.append(currentWeatherCon, weatherIconCon);
         basic.append(weatherIconCon, imgEl);
+        basic.append(weatherIconCon, currentButton);
 
+        currentButton.addEventListener("click", function(){
+        
+            call.getCity(api.key, api.base, index.searchedCity);
+            
+        });
+
+}
+
+
+//Function that updates the weather for all hours for a certain day
+export function updateHourlyWeather(data, index){
+
+    const sliderInnerCon = document.getElementById("slider-inner");
+    basic.removeChildNodes(sliderInnerCon);
+
+    for(let i = 0; i < 24; i++){
+       
+        const hourSlide = basic.createNode("div");
+        const time = basic.createNode("p");
+        const icon = basic.createNode("img");
+        const degrees = basic.createNode("p");
+        const chance = basic.createNode("p");
+
+        basic.setClassAttribute(hourSlide, "slide-info");
+        basic.setClassAttribute(chance, "chance-icon");
+    
+        basic.setInnerHTML(time, `${getHours(data.forecast.forecastday[index].hour[i].time)}:${getMinutes(data.forecast.forecastday[index].hour[i].time)}`);
+        basic.setSrcAttribute(icon, getHourlyIcon(data, i));
+        basic.setInnerHTML(degrees, `${Math.round(data.forecast.forecastday[index].hour[i]["temp_c"])}°`);
+        basic.setInnerHTML(chance, `<span><i class="fa-solid fa-droplet"></i> ${data.forecast.forecastday[index].hour[i]["chance_of_rain"]}%</span>`)
+
+        basic.append(sliderInnerCon, hourSlide);
+        basic.append(hourSlide, time);
+        basic.append(hourSlide, icon);
+        basic.append(hourSlide, degrees);
+        basic.append(hourSlide, chance);
+
+        hourSlide.addEventListener("click", function(){
+            if(sliderInnerCon.querySelector(".slected-slide"))
+             {
+                 const removeSelectedClass = sliderInnerCon.querySelector(".slected-slide");
+                 basic.removeClassAttribute(removeSelectedClass, "slected-slide");
+             }
+            
+             getSpecificWeatherHour(data, i, index);
+             basic.addClassAttribute(hourSlide, "slected-slide");
+        });
+    }
 }
 //Function that extracts the time from a string ex -> "2023-08-10 14:00" => "14:00";
 function extractTime(dateTimeString) {
