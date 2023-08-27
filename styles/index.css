@@ -1,7 +1,8 @@
 :root{
     --bodyBackground: #7CB3F4;
     --fontColor: #F2FBF8;
-    --containerBackground: #5B9BE3; 
+    --containerBackground: #5B9BE3;
+    --hoverColor: #7AADE6;
     --smallerFontGray: #9D9D9D;
 }
 
@@ -131,6 +132,15 @@ header #search-btn{
 .slide-info {
     height: 100%;
     text-align: center;
+    cursor: pointer;
+}
+
+.slide-info:hover{
+    background-color: var(--hoverColor);
+}
+
+.slected-slide{
+    background-color: var(--hoverColor);
 }
 
 .chance-icon span{
@@ -150,8 +160,13 @@ header #search-btn{
 
 .day-info{
     display: flex;
-    margin-left: 0.7rem;
-    margin-right: 0.7rem;
+    padding-left: 0.7rem;
+    padding-left: 0.7rem;
+    cursor: pointer;
+}
+
+.day-info:hover{
+    background-color: var(--hoverColor);
 }
 
 .first-info-day{

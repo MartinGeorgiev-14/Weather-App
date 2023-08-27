@@ -86,9 +86,7 @@ export function currentWeather(data){
     const dateEl = basic.createNode("p");
     const weatherIconCon = basic.createNode("div");
     const imgEl = basic.createNode("img");
-    //Creating all elements for hourly weather slider
-    const sliderCon = basic.createNode("div");
-    const sliderInnerCon = basic.createNode("div");
+
     //Setting attribute to the main container
     basic.setIdAttribute(containersContainer, "containers");
 
@@ -97,11 +95,7 @@ export function currentWeather(data){
     basic.setIdAttribute(cityWeatherCon, "city-weather");
     basic.setIdAttribute(weatherIconCon, "weather-icon-holder");
     basic.setIdAttribute(imgEl, "weather-icon-holder");
-    //Setting attributes to all hourly weather slider elements
-    basic.setIdAttribute(sliderCon, "slider");
-    basic.setClassAttribute(sliderCon, "ripple-hover");
-    basic.setClassAttribute(sliderCon, "ripple-click");
-    basic.setIdAttribute(sliderInnerCon, "slider-inner");
+
     //Setting the text inside current weather container elements
     basic.setInnerHTML(cityNameEl, data.location.name);
     basic.setInnerHTML(degEl, `${Math.round(data.current["temp_c"])}°`);
@@ -125,11 +119,18 @@ export function currentWeather(data){
     //Appending the main container to main
     basic.append(mainEl, containersContainer);
 
+    //Creating all elements for hourly weather slider
+    const sliderCon = basic.createNode("div");
+    const sliderInnerCon = basic.createNode("div");
+    //Setting attributes to all hourly weather slider elements
+    basic.setIdAttribute(sliderCon, "slider");
+    basic.setIdAttribute(sliderInnerCon, "slider-inner");
     //Appending all hourly weather slider elements
     basic.append(containersContainer, sliderCon);
     basic.append(sliderCon, sliderInnerCon);
-   
+       
     //Cycle for the elements of hourly weather slider
+    let dayNum = 0;
     for(let i = 0; i < 24; i++){
         const hourSlide = basic.createNode("div");
         const time = basic.createNode("p");
@@ -150,6 +151,17 @@ export function currentWeather(data){
         basic.append(hourSlide, icon);
         basic.append(hourSlide, degrees);
         basic.append(hourSlide, chance);
+        
+        hourSlide.addEventListener("click", function(){
+           if(sliderCon.querySelector(".slected-slide"))
+            {
+                const removeSelectedClass = sliderCon.querySelector(".slected-slide");
+                basic.removeClassAttribute(removeSelectedClass, "slected-slide");
+            }
+           
+            specific.getSpecificWeatherHour(data, i, dayNum);
+            basic.addClassAttribute(hourSlide, "slected-slide");
+        });
     }
 
 
@@ -175,8 +187,10 @@ export function currentWeather(data){
         const lowDeg = basic.createNode("p");
 
        
-        basic.setClassAttribute(daysCon, "ripple-hover ripple-click");
         basic.setClassAttribute(dayInfo, "day-info");
+        if(i === 0){
+            basic.addClassAttribute(dayInfo, "slected-slide");
+        }
         basic.setClassAttribute(firstDayInfo, "first-info-day");
         basic.setClassAttribute(day, "day");
         basic.setClassAttribute(iconCon, "daily-chance-icon");
@@ -199,6 +213,10 @@ export function currentWeather(data){
         basic.append(secondDayInfo, highDeg);
         basic.append(secondDayInfo, lowDeg);
 
+        dayInfo.addEventListener("click", function(){
+            dayNum = i;
+            
+        })
     }
     
     //Array that contains object with info about each element
@@ -316,5 +334,6 @@ function colorSave(){
         return;
     }
 }
+
 
 

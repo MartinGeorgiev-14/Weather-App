@@ -38,3 +38,11 @@ export function setSrcAttribute(elem, location){
 export function setClassAttribute(elem, value){
     elem.setAttribute("class", value);
 }
+
+export function addClassAttribute(elem, value){
+    elem.classList.add(value);
+}
+
+export function removeClassAttribute(elem, value){
+    elem.classList.remove(value)
+}

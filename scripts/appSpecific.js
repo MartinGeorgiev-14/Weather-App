@@ -1,4 +1,5 @@
 import * as iconInfo from "./iconInfo.js";
+import * as basic from "./basicFunctions.js";
 
 export function getWeeklyDays(date){
     
@@ -66,6 +67,22 @@ export function getIconLive(data){
     }
 }
 
+function getIconDayHour(data, hour, day){
+    const timeNow = extractTime(data.forecast.forecastday[day].hour[hour].time);
+    const sunrise = convertTime12to24(data.forecast.forecastday[day].astro.sunrise);
+    const sunset = convertTime12to24(data.forecast.forecastday[day].astro.sunset);
+    const code = data.forecast.forecastday[day].hour[hour].condition.code;
+    const find = iconInfo.iconInfoStorage.find(item => item.code === code);
+ 
+    if(timeNow > sunrise && timeNow < sunset){
+        
+        return `icons/day/${find.icon}.png`
+    }
+    else{
+        return `icons/night/${find.icon}.png`
+    }
+}
+
 export function getHourlyIcon(data, index){
     const timeThen = extractTime(data.forecast.forecastday[0].hour[index].time);
     const sunrise = convertTime12to24(data.forecast.forecastday[0].astro.sunrise);
@@ -121,6 +138,50 @@ export function convertTime12to24(time12h){
     }
     
     return `${hours}:${minutes}`;
+}
+
+export function getSpecificWeatherHour(data, hour, day)
+{
+    const currentWeatherCon = document.getElementById("current-weather-container");
+    console.log(data.forecast.forecastday[day].hour[hour]["temp_c"]);
+    basic.removeChildNodes(currentWeatherCon);
+
+        //Creating all elements for current weather container
+        const cityWeatherCon = basic.createNode("div"); 
+        const cityNameEl = basic.createNode("h2");
+        const degEl = basic.createNode("h1");
+        const conditionEl = basic.createNode("h3");
+        const feelsEl = basic.createNode("p");
+        const dateEl = basic.createNode("p");
+        const weatherIconCon = basic.createNode("div");
+        const imgEl = basic.createNode("img");
+    
+        //Setting attributes to all current weather container elements
+        basic.setIdAttribute(currentWeatherCon, "current-weather-container");
+        basic.setIdAttribute(cityWeatherCon, "city-weather");
+        basic.setIdAttribute(weatherIconCon, "weather-icon-holder");
+        basic.setIdAttribute(imgEl, "weather-icon-holder");
+    
+        //Setting the text inside current weather container elements
+        basic.setInnerHTML(cityNameEl, data.location.name);
+        basic.setInnerHTML(degEl, `${Math.round(data.forecast.forecastday[day].hour[hour]["temp_c"])}°`);
+        basic.setInnerHTML(conditionEl, data.forecast.forecastday[day].hour[hour].condition.text);
+        basic.setInnerHTML(feelsEl, `${Math.round(data.forecast.forecastday[day].day["mintemp_c"])}° / 
+        ${Math.round(data.forecast.forecastday[day].day["maxtemp_c"])}° feels like 
+        ${Math.round(data.forecast.forecastday[day].hour[hour]["feelslike_c"])}°`);
+        basic.setInnerHTML(dateEl, `${getDay(data.forecast.forecastday[day].hour[hour].time)}
+        ${getHours(data.forecast.forecastday[day].hour[hour].time)}:${getMinutes(data.forecast.forecastday[day].hour[hour].time)}`);
+        basic.setSrcAttribute(imgEl, getIconDayHour(data, hour, day));
+        //Appending all current weather container elements
+        basic.append(currentWeatherCon, cityWeatherCon);
+        basic.append(cityWeatherCon, cityNameEl);
+        basic.append(cityWeatherCon, degEl);
+        basic.append(cityWeatherCon, conditionEl);
+        basic.append(cityWeatherCon, feelsEl);
+        basic.append(cityWeatherCon, dateEl);
+        basic.append(currentWeatherCon, weatherIconCon);
+        basic.append(weatherIconCon, imgEl);
+
 }
 //Function that extracts the time from a string ex -> "2023-08-10 14:00" => "14:00";
 function extractTime(dateTimeString) {
