@@ -73,6 +73,44 @@ header #search-btn{
     background-color: var(--containerBackground);
 }
 
+#dropdown{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#dropdown button{
+    width: 5rem;
+    height: 2rem;
+}
+
+#drop-content{
+    display: none;
+    position: relative;    
+}
+
+#drop-content input{
+    padding: 0.2rem;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+}
+
+#drop-content i{
+    color: white;
+    cursor: pointer;
+}
+
+#dropdown:hover #drop-content{
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 0.3rem;
+}
+
 /* Header End */
 
 /* Start all containers center*/
