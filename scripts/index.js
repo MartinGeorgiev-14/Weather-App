@@ -15,13 +15,22 @@ const mainEl = document.getElementById("main");
 const searchEl = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 const colorButton = document.getElementById("color-mode");
+const setCityInputMain = document.getElementById("set-input");
+const setCityBtnMain = document.getElementById("set-btn");
+const setNewCityInput = document.getElementById("set-city-input");
+const setNewCityBtn = document.getElementById("set-city-btn");
+const footerCon = document.getElementById("footer-container");
 const root = document.querySelector(":root");
 let colorMode = false; //true for light / false for dark
 
+specific.checkForDefaultCity();
 //Calling the function for saved color mode
 colorSave();
-//calling get request wtih hardcoded value
-call.getCity(api.key, api.base, "Veliko Turnovo");
+
+//calling get request wtih the saved default city in local storage
+call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
+footerCon.style.position = "absolute";
+footerCon.style.bottom = "1rem";
 
 searchBtn.addEventListener("click", function(){
     call.getCity(api.key, api.base, searchEl.value);
@@ -33,6 +42,28 @@ searchEl.addEventListener("keydown", function(event){
     if(event.key === "Enter"){
         call.getCity(api.key, api.base, searchEl.value);
         searchEl.value = "";
+    }
+});
+
+setCityBtnMain.addEventListener("click", function(){
+    call.setDefaultCity(api.key, api.base, setCityInputMain.value);
+});
+
+setCityInputMain.addEventListener("keypress", function(event){
+    if(event.key === "Enter"){
+    call.setDefaultCity(api.key, api.base, setCityInputMain.value);
+    }
+});
+
+setNewCityBtn.addEventListener("click", function(){
+    call.setDefaultCity(api.key, api.base, setNewCityInput.value);
+    setNewCityInput.value = "";
+});
+
+setNewCityInput.addEventListener("keypress", function(event){
+    if(event.key === "Enter"){
+        call.setDefaultCity(api.key, api.base, setNewCityInput.value);
+        setNewCityInput.value = "";
     }
 });
 //Event listener for color mode (light/dark)
@@ -77,6 +108,8 @@ colorButton.addEventListener("click", function(){
         colorMode = true;
     }
 });
+
+
 //Main function
 export function currentWeather(data){
     //Removes all nodes in main

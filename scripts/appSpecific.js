@@ -7,6 +7,7 @@ const api = {
     key: "c836ad97ddf247c3bb9162714231907",
     base: "https://api.weatherapi.com/v1/"
 }
+const mainEl = document.getElementById("main");
 
 export function getWeeklyDays(date){
     
@@ -150,7 +151,6 @@ export function convertTime12to24(time12h){
 export function getSpecificWeatherHour(data, hour, day)
 {
     const currentWeatherCon = document.getElementById("current-weather-container");
-    console.log(`hour:${hour} day:${day}`);
     basic.removeChildNodes(currentWeatherCon);
 
         //Creating all elements for current weather container
@@ -174,8 +174,7 @@ export function getSpecificWeatherHour(data, hour, day)
         basic.setInnerHTML(cityNameEl, data.location.name);
         basic.setInnerHTML(degEl, `${Math.round(data.forecast.forecastday[day].hour[hour]["temp_c"])}°`);
         basic.setInnerHTML(conditionEl, data.forecast.forecastday[day].hour[hour].condition.text);
-        basic.setInnerHTML(feelsEl, `${Math.round(data.forecast.forecastday[day].day["mintemp_c"])}° / 
-        ${Math.round(data.forecast.forecastday[day].day["maxtemp_c"])}° feels like 
+        basic.setInnerHTML(feelsEl, `Feels like 
         ${Math.round(data.forecast.forecastday[day].hour[hour]["feelslike_c"])}°`);
         basic.setInnerHTML(dateEl, `${getDay(data.forecast.forecastday[day].hour[hour].time)}
         ${getHours(data.forecast.forecastday[day].hour[hour].time)}:${getMinutes(data.forecast.forecastday[day].hour[hour].time)}`);
@@ -191,10 +190,10 @@ export function getSpecificWeatherHour(data, hour, day)
         basic.append(currentWeatherCon, weatherIconCon);
         basic.append(weatherIconCon, imgEl);
         basic.append(weatherIconCon, currentButton);
-
+        //Returns the live weather of default city
         currentButton.addEventListener("click", function(){
         
-            call.getCity(api.key, api.base, index.searchedCity);
+            call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
             
         });
 
@@ -239,6 +238,13 @@ export function updateHourlyWeather(data, index){
              getSpecificWeatherHour(data, i, index);
              basic.addClassAttribute(hourSlide, "slected-slide");
         });
+    }
+}
+//Checks if there is default city in the localStorage and removes all elements in main
+export function checkForDefaultCity(){
+    
+    if(localStorage.getItem("defaultCity")){
+        basic.removeChildNodes(mainEl);
     }
 }
 //Function that extracts the time from a string ex -> "2023-08-10 14:00" => "14:00";
