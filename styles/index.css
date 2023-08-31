@@ -39,8 +39,6 @@ header h1{
     width: 100%;
 }
 
-
-
 header #search-input{
     background-color: var(--fontColor);
     border: none;
@@ -189,7 +187,10 @@ header #search-btn{
     margin-top: 2rem;
     display: flex;
     justify-content: space-evenly;
-    
+}
+
+#city-weather{
+    min-width: 50%;
 }
 
 #weather-icon-button-holder{
@@ -221,7 +222,7 @@ header #search-btn{
 /* Start Hourly Weather Slider */
 
 #slider {
-    width: 80%;
+    width: 90%;
     height: auto;
     margin-top: 1rem;
     overflow: hidden;
@@ -265,7 +266,7 @@ header #search-btn{
 
 #days-container{
     border-radius: 0.5rem;
-    width: 80%;
+    width: 90%;
     background-color: var(--containerBackground);
     color: var(--fontColor);
     user-select: none;
@@ -341,7 +342,7 @@ header #search-btn{
 /* Start Additional Info Container */
 
 #additional-info-container{
-    width: 80%;
+    width: 90%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
@@ -412,7 +413,7 @@ footer{
 #footer-container{
     display: flex;
     justify-content: space-between;
-    width: 80%;    
+    width: 90%;    
 }
 
 #footer-container{
