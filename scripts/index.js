@@ -180,7 +180,6 @@ export function currentWeather(data){
     basic.append(sliderCon, sliderInnerCon);
        
     //Cycle for the elements of hourly weather slider
- 
     for(let i = 0; i < 24; i++){
         const hourSlide = basic.createNode("div");
         const time = basic.createNode("p");
@@ -247,7 +246,7 @@ export function currentWeather(data){
         basic.setClassAttribute(imgCon, "img-container");
         basic.setClassAttribute(secondDayInfo, "second-info-day");
 
-        basic.setInnerHTML(day, specific.getWeeklyDays(data.forecast.forecastday[i].date));
+        basic.setInnerHTML(day, specific.getWeeklyDays(data.forecast.forecastday[i].date, i));
         basic.setInnerHTML(iconCon, `<span><i class="fa-solid fa-droplet"></i> ${data.forecast.forecastday[i].day["daily_chance_of_rain"]}%</span>`)
         basic.setSrcAttribute(img, specific.getDailyIcon(data, i));
         basic.setInnerHTML(highDeg, `${Math.round(data.forecast.forecastday[i].day["maxtemp_c"])}°`);

@@ -9,13 +9,12 @@ const api = {
 }
 const mainEl = document.getElementById("main");
 
-export function getWeeklyDays(date){
+export function getWeeklyDays(date, index){
     
     const newDate = parseDate(date);
-    const today = extractDateDate(new Date());
     const newDateString = extractDateDate(newDate);
 
-    if(today === newDateString){
+    if(index === 0){
         return "Today"
     }
 
