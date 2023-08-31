@@ -11,6 +11,7 @@ const api = {
 // https://api.weatherapi.com/v1/forecast.json?key=c836ad97ddf247c3bb9162714231907&q=Veliko Turnovo&days=1&aqi=no&alerts=no
 // `${api.base}forecast.json?key={$api.key}&q=${SearchBoxValue}&days=$7&aqi=no&alerts=no`
 
+let dayNum = 0; //Variable for counting days
 const mainEl = document.getElementById("main");
 const searchEl = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
@@ -179,7 +180,7 @@ export function currentWeather(data){
     basic.append(sliderCon, sliderInnerCon);
        
     //Cycle for the elements of hourly weather slider
-    let dayNum = 0;
+ 
     for(let i = 0; i < 24; i++){
         const hourSlide = basic.createNode("div");
         const time = basic.createNode("p");
@@ -191,7 +192,7 @@ export function currentWeather(data){
         basic.setClassAttribute(chance, "chance-icon");
     
         basic.setInnerHTML(time, `${specific.getHours(data.forecast.forecastday[0].hour[i].time)}:${specific.getMinutes(data.forecast.forecastday[0].hour[i].time)}`);
-        basic.setSrcAttribute(icon, specific.getHourlyIcon(data, i));
+        basic.setSrcAttribute(icon, specific.getHourlyIcon(data, i, 0));
         basic.setInnerHTML(degrees, `${Math.round(data.forecast.forecastday[0].hour[i]["temp_c"])}°`);
         basic.setInnerHTML(chance, `<span><i class="fa-solid fa-droplet"></i> ${data.forecast.forecastday[0].hour[i]["chance_of_rain"]}%</span>`)
 
@@ -271,7 +272,7 @@ export function currentWeather(data){
                 basic.removeClassAttribute(removeSelectedClass, "slected-slide");
             }
 
-            specific.updateHourlyWeather(data, i);
+            specific.updateHourlyWeather(data, i, dayNum);
             basic.addClassAttribute(dayInfo, "slected-slide");
         });
     }

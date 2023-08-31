@@ -91,11 +91,12 @@ function getIconDayHour(data, hour, day){
     }
 }
 
-export function getHourlyIcon(data, index){
-    const timeThen = extractTime(data.forecast.forecastday[0].hour[index].time);
-    const sunrise = convertTime12to24(data.forecast.forecastday[0].astro.sunrise);
-    const sunset = convertTime12to24(data.forecast.forecastday[0].astro.sunset);
-    const code = data.forecast.forecastday[0].hour[index].condition.code;
+export function getHourlyIcon(data, index, day){
+    
+    const timeThen = extractTime(data.forecast.forecastday[day].hour[index].time);
+    const sunrise = convertTime12to24(data.forecast.forecastday[day].astro.sunrise);
+    const sunset = convertTime12to24(data.forecast.forecastday[day].astro.sunset);
+    const code = data.forecast.forecastday[day].hour[index].condition.code;
     const find = iconInfo.iconInfoStorage.find(item => item.code === code);
  
     if(timeThen > sunrise && timeThen < sunset){
@@ -152,7 +153,7 @@ export function getSpecificWeatherHour(data, hour, day)
 {
     const currentWeatherCon = document.getElementById("current-weather-container");
     basic.removeChildNodes(currentWeatherCon);
-
+    
         //Creating all elements for current weather container
         const cityWeatherCon = basic.createNode("div"); 
         const cityNameEl = basic.createNode("h2");
@@ -201,8 +202,8 @@ export function getSpecificWeatherHour(data, hour, day)
 
 
 //Function that updates the weather for all hours for a certain day
-export function updateHourlyWeather(data, index){
-
+export function updateHourlyWeather(data, index, day){
+    
     const sliderInnerCon = document.getElementById("slider-inner");
     basic.removeChildNodes(sliderInnerCon);
 
@@ -218,7 +219,7 @@ export function updateHourlyWeather(data, index){
         basic.setClassAttribute(chance, "chance-icon");
     
         basic.setInnerHTML(time, `${getHours(data.forecast.forecastday[index].hour[i].time)}:${getMinutes(data.forecast.forecastday[index].hour[i].time)}`);
-        basic.setSrcAttribute(icon, getHourlyIcon(data, i));
+        basic.setSrcAttribute(icon, getHourlyIcon(data, i, day));
         basic.setInnerHTML(degrees, `${Math.round(data.forecast.forecastday[index].hour[i]["temp_c"])}°`);
         basic.setInnerHTML(chance, `<span><i class="fa-solid fa-droplet"></i> ${data.forecast.forecastday[index].hour[i]["chance_of_rain"]}%</span>`)
 

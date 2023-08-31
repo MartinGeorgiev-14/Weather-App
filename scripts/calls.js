@@ -84,7 +84,7 @@ export async function setDefaultCity(key, base, value){
              footerCon.style.bottom = "";
          }
     }
-    searchedCity
+   
     function displayError(message){
         alert(message);
         return true;
