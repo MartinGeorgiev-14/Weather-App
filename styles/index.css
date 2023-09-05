@@ -145,7 +145,7 @@ header nav{
     border-bottom-left-radius: 0.5rem;
 }
 
-#drop-input i{
+#drop-input i, #drop-save i{
     cursor: pointer;
     font-size: 1rem;
     padding: 0.4rem;
@@ -156,10 +156,44 @@ header nav{
 
 #select-city-drop:hover #drop-input{
     display: flex;
-    
     position: absolute;
-    
-   
+}
+
+
+#drop-save{
+    display: none;
+    position: absolute; 
+    right: 1rem;
+    width: auto;
+    z-index: 1;
+    background-color: var(--containerBackground);
+}
+
+#save-input{
+    display: flex;
+}
+
+#save-input input{
+    padding: 0.4rem;
+    border: none;
+    outline: none;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+#city-list{
+    width: 100%;
+}
+
+#saved-cities-drop:hover #drop-save{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.saved-city{
+    display: flex;
+    justify-content: space-between;
 }
 
 /* Top right buttons end */
