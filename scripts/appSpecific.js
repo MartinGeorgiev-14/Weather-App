@@ -193,7 +193,7 @@ export function getSpecificWeatherHour(data, hour, day)
         //Returns the live weather of default city
         currentButton.addEventListener("click", function(){
         
-            call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
+            call.getCity(api.key, api.base, data.location.name);
             
         });
 

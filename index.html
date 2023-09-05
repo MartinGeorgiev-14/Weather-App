@@ -15,19 +15,37 @@
 </head>
 <body>
     <header>
+        
         <h1>Weahter Vision</h1>
-        <i id="color-mode" class="fa-regular fa-sun"></i>
-        <div id="search-container">
-            <input id="search-input" type="text" placeholder="City">
-            <input id="search-btn" type="submit" value="Search">
-        </div>
-        <div id="dropdown">
-            <i class="fa-solid fa-city"></i>
-            <div id="drop-content">
-                <input id="set-city-input" type="text" placeholder="Set default city">
-                <i id="set-city-btn" class="fa-solid fa-magnifying-glass"></i>
+        <nav id="navigation">
+            <div id="top-right-buttons">
+                <i id="color-mode" class="fa-regular fa-sun"></i>
+                <i id="default-city" class="fa-solid fa-house"></i>
             </div>
-        </div>
+            
+            <div id="search-container">
+                <div id="search-bar">
+                    <input id="search-input" type="text" placeholder="City">
+                    <input id="search-btn" type="submit" value="Search">
+                </div>
+                
+            </div>
+            <div id="dropdowns">
+
+                <div id="select-city-drop">
+                    <i class="fa-solid fa-city"></i>
+                    <div id="drop-input">
+                        <input id="set-city-input" type="text" placeholder="Set default city">
+                        <i id="set-city-btn" class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+
+                <div id="saved-cities-drop">
+                    <i class="fa-regular fa-floppy-disk"></i>
+                </div>
+                
+            </div>
+        </nav>
         
     </header>
     

@@ -14,7 +14,6 @@
 
 body{
     background-color: var(--bodyBackground);
-    height: 100vh;
     font-family: 'Kanit', sans-serif;
     display: flex;
     flex-direction: column;
@@ -22,24 +21,28 @@ body{
 
 /* Header start */
 
-header{
+header h1 {
     text-align: center;
+    color: var(--fontColor);
 }
 
-header h1{
-    color: var(--fontColor);
+header nav{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
+
+/* Search container start */
 
 #search-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    width: 70%;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
 }
 
-header #search-input{
+
+#search-input{
     background-color: var(--fontColor);
     border: none;
     padding: 0.4rem;
@@ -49,21 +52,38 @@ header #search-input{
     border-bottom-left-radius: 0.5rem;
 }
 
-header #search-btn{
+#search-bar{
+    display: flex;
+    justify-content: center;
+}
+
+#search-input{
+    width: 70%;
+}
+
+#search-btn{
     border: none;
     padding: 0.4rem;
-    margin-left: -0.3rem;
     cursor: pointer;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 }
 
-#color-mode{
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    width: 2rem;
+/* Search container end */
+
+
+/* Top left buttons start */
+#top-right-buttons{
+   display: flex;
+   justify-content: center;
+   align-items: flex-end;
+   gap: 0.3rem;
+    
+}
+
+#top-right-buttons i{
     padding: 0.3rem;
+    width: 2rem;
     border-radius: 0.5rem;
     text-align: center;
     font-size: 1.2rem;
@@ -71,17 +91,26 @@ header #search-btn{
     background-color: var(--containerBackground);
 }
 
-#dropdown{
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    
+#top-right-buttons i:hover{
+    background-color: var(--hoverBackground);
 }
 
-#dropdown i{
+.fa-house{
+    color: var(--fontColor);
+}
+
+/* Top left buttons end */
+
+/* Top right buttons start */
+
+#dropdowns {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0.3rem;
+}
+
+#dropdowns i{
     color: var(--fontColor);
     background-color: var(--containerBackground);
     width: 2rem;
@@ -91,16 +120,24 @@ header #search-btn{
     font-size: 1.2rem;
 }
 
-#dropdown i:hover{
+#dropdowns i:hover{
     background-color: var(--hoverBackground);
 }
 
-#drop-content{
-    display: none;
-    position: relative;    
+#select-city-drop{
+    position: relative;
 }
 
-#drop-content input{
+#drop-input{
+    display: none;
+    position: relative; 
+    right: 8.8rem; 
+    width: 100%;
+    z-index: 1;
+    
+}
+
+#drop-input input{
     padding: 0.4rem;
     border: none;
     outline: none;
@@ -108,7 +145,7 @@ header #search-btn{
     border-bottom-left-radius: 0.5rem;
 }
 
-#drop-content i{
+#drop-input i{
     cursor: pointer;
     font-size: 1rem;
     padding: 0.4rem;
@@ -117,12 +154,15 @@ header #search-btn{
     border-bottom-right-radius: 0.5rem;
 }
 
-#dropdown:hover #drop-content{
+#select-city-drop:hover #drop-input{
     display: flex;
-    align-items: center;
-    margin-top: 1rem;
+    
+    position: absolute;
+    
    
 }
+
+/* Top right buttons end */
 
 /* Header End */
 

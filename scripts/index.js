@@ -16,6 +16,7 @@ const mainEl = document.getElementById("main");
 const searchEl = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 const colorButton = document.getElementById("color-mode");
+const defaultCityBut = document.getElementById("default-city");
 const setCityInputMain = document.getElementById("set-input");
 const setCityBtnMain = document.getElementById("set-btn");
 const setNewCityInput = document.getElementById("set-city-input");
@@ -33,40 +34,6 @@ call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
 footerCon.style.position = "absolute";
 footerCon.style.bottom = "1rem";
 
-searchBtn.addEventListener("click", function(){
-    call.getCity(api.key, api.base, searchEl.value);
-    searchedCity = searchEl.value;
-    searchEl.value = "";
-});
-
-searchEl.addEventListener("keydown", function(event){
-    if(event.key === "Enter"){
-        call.getCity(api.key, api.base, searchEl.value);
-        searchEl.value = "";
-    }
-});
-
-setCityBtnMain.addEventListener("click", function(){
-    call.setDefaultCity(api.key, api.base, setCityInputMain.value);
-});
-
-setCityInputMain.addEventListener("keypress", function(event){
-    if(event.key === "Enter"){
-    call.setDefaultCity(api.key, api.base, setCityInputMain.value);
-    }
-});
-
-setNewCityBtn.addEventListener("click", function(){
-    call.setDefaultCity(api.key, api.base, setNewCityInput.value);
-    setNewCityInput.value = "";
-});
-
-setNewCityInput.addEventListener("keypress", function(event){
-    if(event.key === "Enter"){
-        call.setDefaultCity(api.key, api.base, setNewCityInput.value);
-        setNewCityInput.value = "";
-    }
-});
 //Event listener for color mode (light/dark)
 colorButton.addEventListener("click", function(){
     
@@ -110,6 +77,44 @@ colorButton.addEventListener("click", function(){
     }
 });
 
+defaultCityBut.addEventListener("click", function(){
+    call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
+});
+
+setCityBtnMain.addEventListener("click", function(){
+    call.setDefaultCity(api.key, api.base, setCityInputMain.value);
+});
+
+setCityInputMain.addEventListener("keypress", function(event){
+    if(event.key === "Enter"){
+    call.setDefaultCity(api.key, api.base, setCityInputMain.value);
+    }
+});
+
+setNewCityBtn.addEventListener("click", function(){
+    call.setDefaultCity(api.key, api.base, setNewCityInput.value);
+    setNewCityInput.value = "";
+});
+
+setNewCityInput.addEventListener("keypress", function(event){
+    if(event.key === "Enter"){
+        call.setDefaultCity(api.key, api.base, setNewCityInput.value);
+        setNewCityInput.value = "";
+    }
+});
+
+searchBtn.addEventListener("click", function(){
+    call.getCity(api.key, api.base, searchEl.value);
+    searchedCity = searchEl.value;
+    searchEl.value = "";
+});
+
+searchEl.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        call.getCity(api.key, api.base, searchEl.value);
+        searchEl.value = "";
+    }
+});
 
 //Main function
 export function currentWeather(data){
@@ -165,7 +170,7 @@ export function currentWeather(data){
 
     currentButton.addEventListener("click", function(){
         
-        call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
+        call.getCity(api.key, api.base, data.location.name);
         
     });
 
