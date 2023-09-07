@@ -131,7 +131,7 @@ header nav{
 #drop-input{
     display: none;
     position: relative; 
-    right: 8.8rem; 
+    right: 9rem; 
     width: 100%;
     z-index: 1;
     
@@ -150,6 +150,7 @@ header nav{
     font-size: 1rem;
     padding: 0.4rem;
     border-radius: 0;
+    min-width: 2rem;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 }
@@ -166,7 +167,6 @@ header nav{
     right: 1rem;
     width: auto;
     z-index: 1;
-    background-color: var(--containerBackground);
 }
 
 #save-input{
@@ -196,7 +196,22 @@ header nav{
     justify-content: space-between;
 }
 
+.saved-city p{
+    padding-left: 0.3rem;
+    background-color: #F8F8F8;
+    width: 100%;
+}
+
+.saved-city:first-of-type p {
+    border-top-left-radius: 0.5rem;
+}
+
+.saved-city:last-of-type p {
+    border-bottom-left-radius: 0.5rem;
+}
+
 /* Top right buttons end */
+
 
 /* Header End */
 
