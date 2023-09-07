@@ -194,12 +194,17 @@ header nav{
 .saved-city{
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .saved-city p{
     padding-left: 0.3rem;
-    background-color: #F8F8F8;
+    background-color: #FFFFFF;
     width: 100%;
+}
+
+.saved-city p:hover{
+    background-color: #F0F0F0;
 }
 
 .saved-city:first-of-type p {
@@ -208,6 +213,10 @@ header nav{
 
 .saved-city:last-of-type p {
     border-bottom-left-radius: 0.5rem;
+}
+
+#selected-city{
+    background-color: #F0F0F0;
 }
 
 /* Top right buttons end */

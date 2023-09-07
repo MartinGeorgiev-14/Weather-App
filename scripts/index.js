@@ -21,11 +21,15 @@ const setCityInputMain = document.getElementById("set-input");
 const setCityBtnMain = document.getElementById("set-btn");
 const setNewCityInput = document.getElementById("set-city-input");
 const setNewCityBtn = document.getElementById("set-city-btn");
+const saveCityBtn = document.getElementById("save-city-btn");
+const saveCityInput = document.getElementById("save-city-input");
 const footerCon = document.getElementById("footer-container");
 const root = document.querySelector(":root");
 let colorMode = false; //true for light / false for dark
 
 specific.checkForDefaultCity();
+
+specific.displaySavedCities();
 //Calling the function for saved color mode
 colorSave();
 
@@ -77,10 +81,12 @@ colorButton.addEventListener("click", function(){
     }
 });
 
+//Event listener for getting the default city
 defaultCityBut.addEventListener("click", function(){
     call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
 });
 
+//Event listeners for setting first default city(when entering the page for the first time)
 setCityBtnMain.addEventListener("click", function(){
     call.setDefaultCity(api.key, api.base, setCityInputMain.value);
 });
@@ -91,6 +97,7 @@ setCityInputMain.addEventListener("keypress", function(event){
     }
 });
 
+//Event listeners for setting a new default city
 setNewCityBtn.addEventListener("click", function(){
     call.setDefaultCity(api.key, api.base, setNewCityInput.value);
     setNewCityInput.value = "";
@@ -103,9 +110,14 @@ setNewCityInput.addEventListener("keypress", function(event){
     }
 });
 
+saveCityBtn.addEventListener("click", function(){
+    call.saveCityCall(api.key, api.base, saveCityInput.value);
+    saveCityInput.value = "";
+});
+
+//Event listeners for searching a city 
 searchBtn.addEventListener("click", function(){
     call.getCity(api.key, api.base, searchEl.value);
-    searchedCity = searchEl.value;
     searchEl.value = "";
 });
 
