@@ -251,6 +251,7 @@ export function checkForDefaultCity(){
 export function displaySavedCities(){
     const cityListContainer = document.getElementById("city-list");
     const cityList = JSON.parse(localStorage.getItem("savedCities"));
+    
 
     basic.removeChildNodes(cityListContainer);
 
@@ -287,6 +288,8 @@ export function displaySavedCities(){
             localStorage.setItem("savedCities", JSON.stringify(cityList));
             displaySavedCities();
         });
+
+
     }
 
 }

@@ -34,19 +34,14 @@ export async function getCity(key, base, value)
 
 export async function setDefaultCity(key, base, value){
 
-    let isValid = false;
     const response = await fetch(`${base}forecast.json?key=${key}&q=${value}&days=7&aqi=no&alerts=no`);
     const responseData = await response.json();
-    if(!value){
+    if(checkValue(value)){
         return;
-    }
-    else if(checkValue(value)){
-        return; 
     }
 
     try {
         if(response.ok){
-            console.log(responseData)
             localStorage.setItem("defaultCity", value);
             return index.currentWeather(responseData);
         }

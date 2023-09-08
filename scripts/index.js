@@ -115,6 +115,13 @@ saveCityBtn.addEventListener("click", function(){
     saveCityInput.value = "";
 });
 
+saveCityInput.addEventListener("keypress", function(event){
+    if(event.key === "Enter"){
+        call.saveCityCall(api.key, api.base, saveCityInput.value);
+        saveCityInput.value = "";
+    }
+});
+
 //Event listeners for searching a city 
 searchBtn.addEventListener("click", function(){
     call.getCity(api.key, api.base, searchEl.value);
