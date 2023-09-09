@@ -255,43 +255,42 @@ export function displaySavedCities(){
 
     basic.removeChildNodes(cityListContainer);
 
-    for(let i = 0; i < cityList.length; i++){
-        const cityContainer = basic.createNode("div");
-        const cityName = basic.createNode("p");
-        const removeButton = basic.createNode("i");
-       
-        basic.setClassAttribute(cityContainer, "saved-city");
+    if(cityList){
+        for(let i = 0; i < cityList.length; i++){
+            const cityContainer = basic.createNode("div");
+            const cityName = basic.createNode("p");
+            const removeButton = basic.createNode("i");
+        
+            basic.setClassAttribute(cityContainer, "saved-city");
 
-        basic.setInnerHTML(cityName, cityList[i]);
-        basic.setClassAttribute(removeButton, "fa-solid fa-xmark");
+            basic.setInnerHTML(cityName, cityList[i]);
+            basic.setClassAttribute(removeButton, "fa-solid fa-xmark");
 
-        basic.append(cityListContainer, cityContainer);
-        basic.append(cityContainer, cityName);
-        basic.append(cityContainer, removeButton);
+            basic.append(cityListContainer, cityContainer);
+            basic.append(cityContainer, cityName);
+            basic.append(cityContainer, removeButton);
 
-        cityName.addEventListener("click", function(){
-            if(!document.getElementById("selected-city")){
-                basic.setIdAttribute(cityName, "selected-city");
-            }
-            else{
-                const selected = document.getElementById("selected-city");
-                selected.removeAttribute("id");
-                basic.setIdAttribute(cityName, "selected-city")
-            }
-            
-            
-            call.getCity(api.key, api.base, cityList[i]);
-        });
+            cityName.addEventListener("click", function(){
+                if(!document.getElementById("selected-city")){
+                    basic.setIdAttribute(cityName, "selected-city");
+                }
+                else{
+                    const selected = document.getElementById("selected-city");
+                    selected.removeAttribute("id");
+                    basic.setIdAttribute(cityName, "selected-city")
+                }
+                
+                
+                call.getCity(api.key, api.base, cityList[i]);
+            });
 
-        removeButton.addEventListener("click", function(){
-            cityList.splice(i, 1);
-            localStorage.setItem("savedCities", JSON.stringify(cityList));
-            displaySavedCities();
-        });
-
-
+            removeButton.addEventListener("click", function(){
+                cityList.splice(i, 1);
+                localStorage.setItem("savedCities", JSON.stringify(cityList));
+                displaySavedCities();
+            });
+        }
     }
-
 }
 
 //Function that extracts the time from a string ex -> "2023-08-10 14:00" => "14:00";

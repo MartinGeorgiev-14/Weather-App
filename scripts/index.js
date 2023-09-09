@@ -84,6 +84,8 @@ colorButton.addEventListener("click", function(){
 //Event listener for getting the default city
 defaultCityBut.addEventListener("click", function(){
     call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
+    const selected = document.querySelector("#selected-city");
+    selected.removeAttribute("id");
 });
 
 //Event listeners for setting first default city(when entering the page for the first time)
