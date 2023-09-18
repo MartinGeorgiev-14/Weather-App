@@ -282,27 +282,35 @@ header nav{
 
 #current-weather-container{
     color: var(--fontColor);
-    margin-top: 2rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    margin: 0 auto;
+    margin-top: 2rem;
+    width: 90%;
 }
 
 #city-weather{
-    min-width: 50%;
+    max-width: 50%;
+}
+
+#city-weather h3{
+    word-wrap: break-word;
 }
 
 #weather-icon-button-holder{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 #weather-icon-button-holder button{
-    height: 100%;
+    padding: 1rem;
     cursor: pointer;
     border: none;
     background-color: var(--containerBackground);
     color: var(--fontColor);
     border-radius: 0.5rem;
+   
 }
 
 #weather-icon-button-holder button:hover{
