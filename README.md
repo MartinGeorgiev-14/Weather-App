@@ -44,11 +44,12 @@ The header navigation contains these elements
   Can be searched only letters ex.("Sofia", "London")
 
   ### Saved cities dropdown 
-  A dropdown with search bar that adds new cities to "savedCities" in local storage. All cities are displayed below the search bar with X button to the right that upon on click removes the city form "savedCities" in localStorage and redisplay all saved cities.
+  A dropdown with search bar that adds new cities to "savedCities" in local storage. All cities are displayed below the search bar with X button to the right that upon on click removes the city form "savedCities" in     
+  localStorage and redisplay all saved cities.
 
 ## Current weather container
 
-The current wheather container displays live weahter data for certain city. It displays the name of the city, current degrees, condition of the weather(sunny, rain, etc.), the highes and lowes degrees for the day and how the weather feels, the day and hour, icon that shows the condition of the weather and button that displays the live weather of the current displayed city.
+The current wheather container displays live weahter data for certain city. It displays the name of the city, current temperature, condition of the weather(sunny, rain, etc.), the highes and lowest temperature for the day and how the weather feels, the day and hour, icon that shows the condition of the weather and button that displays the live weather of the current displayed city.
 
   ### Weather icon
   
@@ -59,4 +60,6 @@ The current wheather container displays live weahter data for certain city. It d
   The button on click shows the live weather information on the current city.
 
 ## Hourly weather container
+
+Container with 24 section for each hour of the day showing hour, weather icon, temperature and possibility of rain in percents. When clicked on certain section it displays more information about that hour.  
   
