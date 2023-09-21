@@ -25,7 +25,7 @@ The header navigation contains these elements
   - [Search bar](#search-bar)
   - [Set new default city dropdown](set-new-default-city-dropdown)
   - [Saved cities dropdown](saved-cities-dropdown)
-
+  
   ### Color mode button
 
   A button that changes the theme of the site upon on click. There are two themes light and dark. The current theme is saved as "colors" in the local storage in order to load the proper theme on re-opening the app.
@@ -50,5 +50,13 @@ The header navigation contains these elements
 
 The current wheather container displays live weahter data for certain city. It displays the name of the city, current degrees, condition of the weather(sunny, rain, etc.), the highes and lowes degrees for the day and how the weather feels, the day and hour, icon that shows the condition of the weather and button that displays the live weather of the current displayed city.
 
-  ### Current weather icon
-  The icon is defined by the condition of the weather and the sunrise and sunset in order to show sun or moon
+  ### Weather icon
+  
+  The icon is defined by the condition of the weather and the sunrise and sunset in order to show sun or moon.
+
+  ### Current weather button 
+
+  The button on click shows the live weather information on the current city.
+
+## Hourly weather container
+  
