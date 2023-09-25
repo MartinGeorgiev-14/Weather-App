@@ -125,6 +125,13 @@ export function getUvCondition(data){
     score < 11 ? "Very High" : "Extreme" 
 }
 
+function getUvCondtitionCertainDay(score){
+    return score < 3 ? "Low" :
+    score < 6 ? "Moderate" :
+    score < 8 ? "High" :
+    score < 11 ? "Very High" : "Extreme" 
+}
+
 //Functiont that parses string to a Date
 function parseDate(date){
     
@@ -152,6 +159,7 @@ export function getSpecificWeatherHour(data, hour, day)
 {
     const currentWeatherCon = document.getElementById("current-weather-container");
     basic.removeChildNodes(currentWeatherCon);
+    
     
         //Creating all elements for current weather container
         const cityWeatherCon = basic.createNode("div"); 
@@ -197,6 +205,13 @@ export function getSpecificWeatherHour(data, hour, day)
             
         });
 
+        const uvStat = document.getElementById("uv-stat");
+        const humidityStat = document.getElementById("humidity-stat");
+        const windStat = document.getElementById("wind-stat");
+
+        basic.setInnerHTML(uvStat, getUvCondtitionCertainDay(data.forecast.forecastday[day].hour[hour].uv));
+        basic.setInnerHTML(humidityStat, data.forecast.forecastday[day].hour[hour].humidity + " %");
+        basic.setInnerHTML(windStat, Math.round(data.forecast.forecastday[day].hour[hour]["wind_kph"]) + " km/h");
 }
 
 
@@ -238,7 +253,21 @@ export function updateHourlyWeather(data, index, day){
              getSpecificWeatherHour(data, i, index);
              basic.addClassAttribute(hourSlide, "slected-slide");
         });
+
+        const uvStat = document.getElementById("uv-stat");
+        const humidityStat = document.getElementById("humidity-stat");
+        const windStat = document.getElementById("wind-stat");
+        const riseStat = document.getElementById("rise-stat");
+        const setStat = document.getElementById("set-stat");
+
+        basic.setInnerHTML(uvStat, getUvCondtitionCertainDay(data.forecast.forecastday[index].day.uv));
+        basic.setInnerHTML(humidityStat, data.forecast.forecastday[index].day.avghumidity + " %");
+        basic.setInnerHTML(windStat, Math.round(data.forecast.forecastday[index].day["maxwind_kph"]) + " km/h");
+        basic.setInnerHTML(riseStat, convertTime12to24(data.forecast.forecastday[index].astro.sunrise));
+        basic.setInnerHTML(setStat, convertTime12to24(data.forecast.forecastday[index].astro.sunset));
     }
+
+
 }
 //Checks if there is default city in the localStorage and removes all elements in main
 export function checkForDefaultCity(){

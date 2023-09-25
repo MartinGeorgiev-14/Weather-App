@@ -306,24 +306,29 @@ export function currentWeather(data){
     const infoArr = [{
         title: "UV index",
         stat: specific.getUvCondition(data),
-        icon: "fa-solid fa-sun"
+        icon: "fa-solid fa-sun",
+        id: "uv-stat"
     },
     {
         title: "Humidity",
         stat: data.current.humidity + " %",
-        icon: "fa-solid fa-droplet droplet"
+        icon: "fa-solid fa-droplet droplet",
+        id: "humidity-stat"
     },
     {
         title: "Wind",
         stat: Math.round(data.current["wind_kph"]) + " km/h",
-        icon: "fa-solid fa-wind"
+        icon: "fa-solid fa-wind",
+        id: "wind-stat"
     },
     {
         icon: "fa-regular fa-sun",
         riseTitle: "Sunrise",
         riseStat: specific.convertTime12to24(data.forecast.forecastday[0].astro.sunrise),
+        idRiseStat: "rise-stat",
         setTitle: "Sunset",
-        setStat: specific.convertTime12to24(data.forecast.forecastday[0].astro.sunset)
+        setStat: specific.convertTime12to24(data.forecast.forecastday[0].astro.sunset),
+        idSetStat: "set-stat"
     }];
 
     const additionalInfoCon = basic.createNode("div");
@@ -353,8 +358,10 @@ export function currentWeather(data){
             basic.setIdAttribute(secDiv, "stats-container");
             basic.setClassAttribute(riseDiv, "sunrise-set");
             basic.setClassAttribute(riseTitle, "info-title");
+            basic.setIdAttribute(riseStat, infoArr[elemNum].idRiseStat);
             basic.setClassAttribute(setDownDiv, "sunrise-set");
             basic.setClassAttribute(setDownTitle, "info-title");
+            basic.setIdAttribute(setDownStat, infoArr[elemNum].idSetStat);
 
             basic.setClassAttribute(icon, "fa-regular fa-sun");
             basic.setInnerHTML(riseTitle, "Sunrise");
@@ -382,6 +389,7 @@ export function currentWeather(data){
 
         basic.setClassAttribute(div, "info-container");
         basic.setClassAttribute(title, "info-title");
+        basic.setIdAttribute(stat, infoArr[elemNum].id);
 
         basic.setClassAttribute(icon, infoArr[elemNum].icon);
         basic.setInnerHTML(title, infoArr[elemNum].title);
