@@ -161,6 +161,12 @@ export function currentWeather(data){
     //Setting attributes to all current weather container elements
     basic.setIdAttribute(currentWeatherCon, "current-weather-container");
     basic.setIdAttribute(cityWeatherCon, "city-weather");
+    basic.setIdAttribute(cityNameEl, "city-name-current");
+    basic.setIdAttribute(degEl, "degrees-current");
+    basic.setIdAttribute(conditionEl, "condition-current");
+    basic.setIdAttribute(feelsEl, "feels-current");
+    basic.setIdAttribute(dateEl, "date-current");
+    
     basic.setIdAttribute(weatherIconCon, "weather-icon-button-holder");
     basic.setIdAttribute(imgEl, "weather-icon-button-holder");
 
@@ -214,7 +220,12 @@ export function currentWeather(data){
         const chance = basic.createNode("p");
 
         basic.setClassAttribute(hourSlide, "slide-info");
+        basic.setIdAttribute(hourSlide, `hour-slide-${i}`);
+        basic.setIdAttribute(time, `hour-time-${i}`);
+        basic.setIdAttribute(icon, `hour-icon-${i}`);
+        basic.setIdAttribute(degrees, `hour-degrees-${i}`);
         basic.setClassAttribute(chance, "chance-icon");
+        basic.setIdAttribute(chance, `hour-chance-${i}`);
     
         basic.setInnerHTML(time, `${specific.getHours(data.forecast.forecastday[0].hour[i].time)}:${specific.getMinutes(data.forecast.forecastday[0].hour[i].time)}`);
         basic.setSrcAttribute(icon, specific.getHourlyIcon(data, i, 0));

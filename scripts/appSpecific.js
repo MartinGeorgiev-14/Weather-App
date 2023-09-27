@@ -157,61 +157,34 @@ export function convertTime12to24(time12h){
 //Function that displays the weather for specific hour
 export function getSpecificWeatherHour(data, hour, day)
 {
-    const currentWeatherCon = document.getElementById("current-weather-container");
-    basic.removeChildNodes(currentWeatherCon);
-    
-    
-        //Creating all elements for current weather container
-        const cityWeatherCon = basic.createNode("div"); 
-        const cityNameEl = basic.createNode("h2");
-        const degEl = basic.createNode("h1");
-        const conditionEl = basic.createNode("h3");
-        const feelsEl = basic.createNode("p");
-        const dateEl = basic.createNode("p");
-        const weatherIconCon = basic.createNode("div");
-        const imgEl = basic.createNode("img");
-        const currentButton = basic.createNode("button");
+    //Getting all current weather elements by ids
+    const cityNameEl = document.getElementById("city-name-current");
+    const degEl = document.getElementById("degrees-current");
+    const conditionEl = document.getElementById("condition-current");
+    const feelsEl = document.getElementById("feels-current");
+    const dateEl = document.getElementById("date-current");
+    const imgEl = document.getElementById("weather-icon-button-holder");
 
-        //Setting attributes to all current weather container elements
-        basic.setIdAttribute(currentWeatherCon, "current-weather-container");
-        basic.setIdAttribute(cityWeatherCon, "city-weather");
-        basic.setIdAttribute(weatherIconCon, "weather-icon-button-holder");
-        basic.setIdAttribute(imgEl, "weather-icon-button-holder");
-    
-        //Setting the text inside current weather container elements
-        basic.setInnerHTML(cityNameEl, data.location.name);
-        basic.setInnerHTML(degEl, `${Math.round(data.forecast.forecastday[day].hour[hour]["temp_c"])}°`);
-        basic.setInnerHTML(conditionEl, data.forecast.forecastday[day].hour[hour].condition.text);
-        basic.setInnerHTML(feelsEl, `Feels like 
-        ${Math.round(data.forecast.forecastday[day].hour[hour]["feelslike_c"])}°`);
-        basic.setInnerHTML(dateEl, `${getDay(data.forecast.forecastday[day].hour[hour].time)}
-        ${getHours(data.forecast.forecastday[day].hour[hour].time)}:${getMinutes(data.forecast.forecastday[day].hour[hour].time)}`);
-        basic.setSrcAttribute(imgEl, getIconDayHour(data, hour, day));
-        basic.setInnerHTML(currentButton, "Current weather");
-        //Appending all current weather container elements
-        basic.append(currentWeatherCon, cityWeatherCon);
-        basic.append(cityWeatherCon, cityNameEl);
-        basic.append(cityWeatherCon, degEl);
-        basic.append(cityWeatherCon, conditionEl);
-        basic.append(cityWeatherCon, feelsEl);
-        basic.append(cityWeatherCon, dateEl);
-        basic.append(currentWeatherCon, weatherIconCon);
-        basic.append(weatherIconCon, imgEl);
-        basic.append(weatherIconCon, currentButton);
-        //Returns the live weather of default city
-        currentButton.addEventListener("click", function(){
-        
-            call.getCity(api.key, api.base, data.location.name);
-            
-        });
+    //Getting all additional info elements by ids
+    const uvStat = document.getElementById("uv-stat");
+    const humidityStat = document.getElementById("humidity-stat");
+    const windStat = document.getElementById("wind-stat");
 
-        const uvStat = document.getElementById("uv-stat");
-        const humidityStat = document.getElementById("humidity-stat");
-        const windStat = document.getElementById("wind-stat");
+    //Setting new weather information for all current weather elements
+    basic.setInnerHTML(cityNameEl, data.location.name);
+    basic.setInnerHTML(degEl, `${Math.round(data.forecast.forecastday[day].hour[hour]["temp_c"])}°`);
+    basic.setInnerHTML(conditionEl, data.forecast.forecastday[day].hour[hour].condition.text);
+    basic.setInnerHTML(feelsEl, `Feels like 
+    ${Math.round(data.forecast.forecastday[day].hour[hour]["feelslike_c"])}°`);
+    basic.setInnerHTML(dateEl, `${getDay(data.forecast.forecastday[day].hour[hour].time)}
+    ${getHours(data.forecast.forecastday[day].hour[hour].time)}:${getMinutes(data.forecast.forecastday[day].hour[hour].time)}`);
+    basic.setSrcAttribute(imgEl, getIconDayHour(data, hour, day));
 
-        basic.setInnerHTML(uvStat, getUvCondtitionCertainDay(data.forecast.forecastday[day].hour[hour].uv));
-        basic.setInnerHTML(humidityStat, data.forecast.forecastday[day].hour[hour].humidity + " %");
-        basic.setInnerHTML(windStat, Math.round(data.forecast.forecastday[day].hour[hour]["wind_kph"]) + " km/h");
+    //Setting new weather information for all additional information elements
+    basic.setInnerHTML(uvStat, getUvCondtitionCertainDay(data.forecast.forecastday[day].hour[hour].uv));
+    basic.setInnerHTML(humidityStat, data.forecast.forecastday[day].hour[hour].humidity + " %");
+    basic.setInnerHTML(windStat, Math.round(data.forecast.forecastday[day].hour[hour]["wind_kph"]) + " km/h");
+   
 }
 
 
@@ -219,30 +192,21 @@ export function getSpecificWeatherHour(data, hour, day)
 export function updateHourlyWeather(data, index, day){
     
     const sliderInnerCon = document.getElementById("slider-inner");
-    basic.removeChildNodes(sliderInnerCon);
 
     for(let i = 0; i < 24; i++){
-       
-        const hourSlide = basic.createNode("div");
-        const time = basic.createNode("p");
-        const icon = basic.createNode("img");
-        const degrees = basic.createNode("p");
-        const chance = basic.createNode("p");
-
-        basic.setClassAttribute(hourSlide, "slide-info");
-        basic.setClassAttribute(chance, "chance-icon");
-    
+        //Getting each hour element by ids
+        const hourSlide = document.getElementById(`hour-slide-${i}`);
+        const time = document.getElementById(`hour-time-${i}`);
+        const icon = document.getElementById(`hour-icon-${i}`);
+        const degrees = document.getElementById(`hour-degrees-${i}`);
+        const chance = document.getElementById(`hour-chance-${i}`);
+        //Setting each hour new information
         basic.setInnerHTML(time, `${getHours(data.forecast.forecastday[index].hour[i].time)}:${getMinutes(data.forecast.forecastday[index].hour[i].time)}`);
         basic.setSrcAttribute(icon, getHourlyIcon(data, i, day));
         basic.setInnerHTML(degrees, `${Math.round(data.forecast.forecastday[index].hour[i]["temp_c"])}°`);
         basic.setInnerHTML(chance, `<span><i class="fa-solid fa-droplet"></i> ${data.forecast.forecastday[index].hour[i]["chance_of_rain"]}%</span>`)
-
-        basic.append(sliderInnerCon, hourSlide);
-        basic.append(hourSlide, time);
-        basic.append(hourSlide, icon);
-        basic.append(hourSlide, degrees);
-        basic.append(hourSlide, chance);
-
+        
+        //Changing the parent element of selected-slide class 
         hourSlide.addEventListener("click", function(){
             if(sliderInnerCon.querySelector(".slected-slide"))
              {
@@ -254,6 +218,7 @@ export function updateHourlyWeather(data, index, day){
              basic.addClassAttribute(hourSlide, "slected-slide");
         });
 
+        
         const uvStat = document.getElementById("uv-stat");
         const humidityStat = document.getElementById("humidity-stat");
         const windStat = document.getElementById("wind-stat");

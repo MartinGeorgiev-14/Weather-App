@@ -9,7 +9,7 @@ A JavaScript project for weather cast app. Showing the daily/hourly weather cond
 - [Current weather container](#current-weather-container)
 - [Hourly weather container](#hourly-weather-container)
 - [Daily weather container](#daily-weather-container)
-- [Additional information container](additional-information-container)
+- [Additional information container](#additional-information-container)
 - [Project requirements](#project-requirements)
 - [Project setup](#project-setup)
 
@@ -23,8 +23,8 @@ The header navigation contains these elements
   - [Color mode button](#color-mode-button)
   - [Default city button](#default-city-button)
   - [Search bar](#search-bar)
-  - [Set new default city dropdown](set-new-default-city-dropdown)
-  - [Saved cities dropdown](saved-cities-dropdown)
+  - [Set new default city dropdown](#set-new-default-city-dropdown)
+  - [Saved cities dropdown](#saved-cities-dropdown)
   
   ### Color mode button
 
