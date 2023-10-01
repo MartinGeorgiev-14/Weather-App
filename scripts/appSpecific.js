@@ -154,6 +154,7 @@ export function convertTime12to24(time12h){
     
     return `${hours}:${minutes}`;
 }
+
 //Function that displays the weather for specific hour
 export function getSpecificWeatherHour(data, hour, day)
 {
@@ -163,7 +164,7 @@ export function getSpecificWeatherHour(data, hour, day)
     const conditionEl = document.getElementById("condition-current");
     const feelsEl = document.getElementById("feels-current");
     const dateEl = document.getElementById("date-current");
-    const imgEl = document.getElementById("weather-icon-button-holder");
+    const imgEl = document.getElementById("weather-icon-holder");
 
     //Getting all additional info elements by ids
     const uvStat = document.getElementById("uv-stat");
@@ -193,7 +194,23 @@ export function updateHourlyWeather(data, index, day){
     
     const sliderInnerCon = document.getElementById("slider-inner");
 
+        //Getting all current weather elements by ids
+        const degEl = document.getElementById("degrees-current");
+        const conditionEl = document.getElementById("condition-current");
+        const feelsEl = document.getElementById("feels-current");
+        const dateEl = document.getElementById("date-current");
+        const imgEl = document.getElementById("weather-icon-holder");
+        //Setting each 
+        basic.setInnerHTML(degEl, `${Math.round(data.forecast.forecastday[day].day["maxtemp_c"])}°`);
+        basic.setInnerHTML(conditionEl, data.forecast.forecastday[day].day.condition.text);
+        basic.setInnerHTML(feelsEl, `${Math.round(data.forecast.forecastday[day].day["maxtemp_c"])}° / 
+        ${Math.round(data.forecast.forecastday[day].day["mintemp_c"])}° feels like 
+        ${Math.round(data.current["feelslike_c"])}°`);
+        basic.setInnerHTML(dateEl,  `${getDay(data.location.localtime)}`);
+        basic.setSrcAttribute(imgEl, getDailyIcon(data, day));
+    
     for(let i = 0; i < 24; i++){
+
         //Getting each hour element by ids
         const hourSlide = document.getElementById(`hour-slide-${i}`);
         const time = document.getElementById(`hour-time-${i}`);
@@ -210,27 +227,28 @@ export function updateHourlyWeather(data, index, day){
         hourSlide.addEventListener("click", function(){
             if(sliderInnerCon.querySelector(".slected-slide"))
              {
-                 const removeSelectedClass = sliderInnerCon.querySelector(".slected-slide");
-                 basic.removeClassAttribute(removeSelectedClass, "slected-slide");
+               
+                const removeSelectedClass = sliderInnerCon.querySelector(".slected-slide");
+                basic.removeClassAttribute(removeSelectedClass, "slected-slide");
              }
             
              getSpecificWeatherHour(data, i, index);
              basic.addClassAttribute(hourSlide, "slected-slide");
         });
 
-        
-        const uvStat = document.getElementById("uv-stat");
-        const humidityStat = document.getElementById("humidity-stat");
-        const windStat = document.getElementById("wind-stat");
-        const riseStat = document.getElementById("rise-stat");
-        const setStat = document.getElementById("set-stat");
-
-        basic.setInnerHTML(uvStat, getUvCondtitionCertainDay(data.forecast.forecastday[index].day.uv));
-        basic.setInnerHTML(humidityStat, data.forecast.forecastday[index].day.avghumidity + " %");
-        basic.setInnerHTML(windStat, Math.round(data.forecast.forecastday[index].day["maxwind_kph"]) + " km/h");
-        basic.setInnerHTML(riseStat, convertTime12to24(data.forecast.forecastday[index].astro.sunrise));
-        basic.setInnerHTML(setStat, convertTime12to24(data.forecast.forecastday[index].astro.sunset));
     }
+
+    const uvStat = document.getElementById("uv-stat");
+    const humidityStat = document.getElementById("humidity-stat");
+    const windStat = document.getElementById("wind-stat");
+    const riseStat = document.getElementById("rise-stat");
+    const setStat = document.getElementById("set-stat");
+
+    basic.setInnerHTML(uvStat, getUvCondtitionCertainDay(data.forecast.forecastday[index].day.uv));
+    basic.setInnerHTML(humidityStat, data.forecast.forecastday[index].day.avghumidity + " %");
+    basic.setInnerHTML(windStat, Math.round(data.forecast.forecastday[index].day["maxwind_kph"]) + " km/h");
+    basic.setInnerHTML(riseStat, convertTime12to24(data.forecast.forecastday[index].astro.sunrise));
+    basic.setInnerHTML(setStat, convertTime12to24(data.forecast.forecastday[index].astro.sunset));
 
 
 }

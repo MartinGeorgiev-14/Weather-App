@@ -215,8 +215,9 @@ header nav{
     border-bottom-left-radius: 0.5rem;
 }
 
-#selected-city{
+#selected-hour{
     background-color: #F0F0F0;
+    color: red;
 }
 
 /* Top right buttons end */

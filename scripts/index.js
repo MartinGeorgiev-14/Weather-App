@@ -84,8 +84,11 @@ colorButton.addEventListener("click", function(){
 //Event listener for getting the default city
 defaultCityBut.addEventListener("click", function(){
     call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
-    const selected = document.querySelector("#selected-city");
-    selected.removeAttribute("id");
+    if(document.querySelector("#selected-city")){
+        const selected = document.querySelector("#selected-city");
+        selected.removeAttribute("id");
+    }
+  
 });
 
 //Event listeners for setting first default city(when entering the page for the first time)
@@ -168,14 +171,14 @@ export function currentWeather(data){
     basic.setIdAttribute(dateEl, "date-current");
     
     basic.setIdAttribute(weatherIconCon, "weather-icon-button-holder");
-    basic.setIdAttribute(imgEl, "weather-icon-button-holder");
+    basic.setIdAttribute(imgEl, "weather-icon-holder");
 
     //Setting the text inside current weather container elements
     basic.setInnerHTML(cityNameEl, data.location.name);
     basic.setInnerHTML(degEl, `${Math.round(data.current["temp_c"])}°`);
     basic.setInnerHTML(conditionEl, data.current.condition.text);
-    basic.setInnerHTML(feelsEl, `${Math.round(data.forecast.forecastday[0].day["mintemp_c"])}° / 
-    ${Math.round(data.forecast.forecastday[0].day["maxtemp_c"])}° feels like 
+    basic.setInnerHTML(feelsEl, `${Math.round(data.forecast.forecastday[0].day["maxtemp_c"])}° / 
+    ${Math.round(data.forecast.forecastday[0].day["mintemp_c"])}° feels like 
     ${Math.round(data.current["feelslike_c"])}°`);
     basic.setInnerHTML(dateEl, `${specific.getDay(data.location.localtime)}
     ${specific.getHours(data.location.localtime)}:${specific.getMinutes(data.location.localtime)}`);
@@ -274,6 +277,7 @@ export function currentWeather(data){
 
        
         basic.setClassAttribute(dayInfo, "day-info");
+        basic.setIdAttribute(dayInfo, `day-${i}`);
         if(i === 0){
             basic.addClassAttribute(dayInfo, "slected-slide");
         }
@@ -303,7 +307,11 @@ export function currentWeather(data){
 
             dayNum = i;
             if(daysCon.querySelector(".slected-slide"))
-            {
+            {   
+                if(sliderInnerCon.querySelector(".slected-slide")){
+                    const removeClass = sliderInnerCon.querySelector(".slected-slide");
+                    basic.removeClassAttribute(removeClass, "slected-slide");
+                }
                 const removeSelectedClass = daysCon.querySelector(".slected-slide");
                 basic.removeClassAttribute(removeSelectedClass, "slected-slide");
             }
