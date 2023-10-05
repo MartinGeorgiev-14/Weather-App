@@ -71,22 +71,17 @@ export async function saveCityCall(key, base, value){
 
     try {
         if(response.ok){
-            //Checks if there is any saved cities
-            if(!localStorage.getItem("savedCities")){
-                localStorage.setItem("savedCities", JSON.stringify([responseData.location.name]));
+            let savedCities = JSON.parse(localStorage.getItem("savedCities"));
+            //Checks if a certain city is already saved
+            if(savedCities.find((element) => element === responseData.location.name)){
+                alert("The city is already saved");
             }
             else{
-                let savedCities = JSON.parse(localStorage.getItem("savedCities"));
-                //Checks if a certain city is already saved
-                if(savedCities.find((element) => element === responseData.location.name)){
-                    alert("The city is already saved");
-                }
-                else{
-                //Adds the new city to the rest
-                    savedCities.push(responseData.location.name);
-                    localStorage.setItem("savedCities", JSON.stringify(savedCities));
-                }
+            //Adds the new city to the rest
+                savedCities.push(responseData.location.name);
+                localStorage.setItem("savedCities", JSON.stringify(savedCities));
             }
+            
             return specific.displaySavedCities(responseData);            
         }
         //Checks if the city exists

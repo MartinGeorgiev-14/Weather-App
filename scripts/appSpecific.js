@@ -155,6 +155,9 @@ export function convertTime12to24(time12h){
     return `${hours}:${minutes}`;
 }
 
+
+
+
 //Function that displays the weather for specific hour
 export function getSpecificWeatherHour(data, hour, day)
 {
@@ -305,6 +308,25 @@ export function displaySavedCities(){
     }
 }
 
+//Loads the saved mode/colors for the site
+export function colorSave(){
+    const root = document.querySelector(":root");
+    const colorButton = document.getElementById("color-mode");
+    const colors = JSON.parse(localStorage.getItem("colors"));
+    
+
+    if(colors){
+        root.style.setProperty("--bodyBackground", colors.bodyBackground);
+        root.style.setProperty("--fontColor", colors.fontColor);
+        root.style.setProperty("--containerBackground", colors.containerBackground);
+        root.style.setProperty("--hoverBackground", colors.hoverBackground);
+        basic.setClassAttribute(colorButton, colors.icon);
+    }
+    else {
+        return;
+    }
+}
+
 //Function that extracts the time from a string ex -> "2023-08-10 14:00" => "14:00";
 function extractTime(dateTimeString) {
     
@@ -324,3 +346,5 @@ function extractDateDate(date)
 
     return joined;
 }
+
+
