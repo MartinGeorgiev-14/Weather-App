@@ -12,7 +12,7 @@ const mainEl = document.getElementById("main");
 export function getWeeklyDays(date, index){
     
     const newDate = parseDate(date);
-    const newDateString = extractDateDate(newDate);
+   
 
     if(index === 0){
         return "Today"
@@ -21,13 +21,6 @@ export function getWeeklyDays(date, index){
     const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     return daysInWeek[newDate.getDay()];
 
-}
-
-export function getDay(date){
-    const newDate = parseDate(date);
-
-    const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    return daysInWeek[newDate.getDay()];
 }
 
 export function getHours(date){

@@ -180,7 +180,7 @@ export function currentWeather(data){
     basic.setInnerHTML(feelsEl, `${Math.round(data.forecast.forecastday[0].day["maxtemp_c"])}° / 
     ${Math.round(data.forecast.forecastday[0].day["mintemp_c"])}° feels like 
     ${Math.round(data.current["feelslike_c"])}°`);
-    basic.setInnerHTML(dateEl, `${specific.getDay(data.location.localtime)}
+    basic.setInnerHTML(dateEl, `${specific.getWeeklyDays(data.location.localtime)}
     ${specific.getHours(data.location.localtime)}:${specific.getMinutes(data.location.localtime)}`);
     basic.setSrcAttribute(imgEl, specific.getIconLive(data));
     basic.setInnerHTML(currentButton, "Current weather");
@@ -356,13 +356,13 @@ export function currentWeather(data){
   
     //Recursion that loops through all elements in infoArr
     addInfoConRecur(0);
-    function addInfoConRecur(elemNum){
+    function addInfoConRecur(){
 
-        if(elemNum > 3){
+        if(arguments[0] > 3){
             return;
         }
         
-        else if(infoArr[elemNum].riseTitle){
+        else if(infoArr[arguments[0]].riseTitle){
             const mainDiv = basic.createNode("div");
             const icon = basic.createNode("i");
             const secDiv = basic.createNode("div");
@@ -377,16 +377,16 @@ export function currentWeather(data){
             basic.setIdAttribute(secDiv, "stats-container");
             basic.setClassAttribute(riseDiv, "sunrise-set");
             basic.setClassAttribute(riseTitle, "info-title");
-            basic.setIdAttribute(riseStat, infoArr[elemNum].idRiseStat);
+            basic.setIdAttribute(riseStat, infoArr[arguments[0]].idRiseStat);
             basic.setClassAttribute(setDownDiv, "sunrise-set");
             basic.setClassAttribute(setDownTitle, "info-title");
-            basic.setIdAttribute(setDownStat, infoArr[elemNum].idSetStat);
+            basic.setIdAttribute(setDownStat, infoArr[arguments[0]].idSetStat);
 
             basic.setClassAttribute(icon, "fa-regular fa-sun");
             basic.setInnerHTML(riseTitle, "Sunrise");
-            basic.setInnerHTML(riseStat, infoArr[elemNum].riseStat);
+            basic.setInnerHTML(riseStat, infoArr[arguments[0]].riseStat);
             basic.setInnerHTML(setDownTitle, "Sunset");
-            basic.setInnerHTML(setDownStat, infoArr[elemNum].setStat);
+            basic.setInnerHTML(setDownStat, infoArr[arguments[0]].setStat);
 
             basic.append(additionalInfoCon, mainDiv);
             basic.append(mainDiv, icon);
@@ -398,7 +398,7 @@ export function currentWeather(data){
             basic.append(setDownDiv, setDownTitle);
             basic.append(setDownDiv, setDownStat);
 
-            return addInfoConRecur(elemNum + 1);
+            return addInfoConRecur(arguments[0] + 1);
         }
 
         const div = basic.createNode("div");
@@ -408,18 +408,18 @@ export function currentWeather(data){
 
         basic.setClassAttribute(div, "info-container");
         basic.setClassAttribute(title, "info-title");
-        basic.setIdAttribute(stat, infoArr[elemNum].id);
+        basic.setIdAttribute(stat, infoArr[arguments[0]].id);
 
-        basic.setClassAttribute(icon, infoArr[elemNum].icon);
-        basic.setInnerHTML(title, infoArr[elemNum].title);
-        basic.setInnerHTML(stat, infoArr[elemNum].stat);
+        basic.setClassAttribute(icon, infoArr[arguments[0]].icon);
+        basic.setInnerHTML(title, infoArr[arguments[0]].title);
+        basic.setInnerHTML(stat, infoArr[arguments[0]].stat);
 
         basic.append(additionalInfoCon, div);
         basic.append(div, icon);
         basic.append(div, title);
         basic.append(div, stat);
 
-        return addInfoConRecur(elemNum + 1);
+        return addInfoConRecur(arguments[0] + 1);
     };
    
     basic.append(containersContainer, additionalInfoCon);
