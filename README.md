@@ -76,8 +76,8 @@ Container with 4 sections showing different parameters for the day. Uv level, hu
 ## Project requirements
 
 The only thing required to run this project is Live Server extension from Visual Studio's marketplace/extensions.
-  Marketplace: https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
-  Id: ritwickdey.LiveServer
+  - Marketplace: https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+  - Id: ritwickdey.LiveServer
 
 ## Project setup
 
