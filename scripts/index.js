@@ -27,13 +27,11 @@ const footerCon = document.getElementById("footer-container");
 const root = document.querySelector(":root");
 let colorMode = false; //true for light / false for dark
 
-
-
 specific.checkForDefaultCity();
 
 specific.displaySavedCities();
 //Calling the function for saved color mode
-specific.colorSave();
+colorSave();
 
 //calling get request wtih the saved default city in local storage
 call.getCity(api.key, api.base, localStorage.getItem("defaultCity"));
@@ -197,7 +195,6 @@ export function currentWeather(data){
     basic.append(currentWeatherCon, weatherIconCon);
     basic.append(weatherIconCon, imgEl);
     basic.append(weatherIconCon, currentButton);
-
     //Appending the main container to main
     basic.append(mainEl, containersContainer);
 
@@ -429,9 +426,25 @@ export function currentWeather(data){
 
     const updatedAt = document.getElementById("updated-at");
     basic.setInnerHTML(updatedAt, data.current["last_updated"]);
+
 }
 
+//Loads the saved mode/colors for the site
+function colorSave(){
+    const colors = JSON.parse(localStorage.getItem("colors"));
 
+    if(colors){
+        root.style.setProperty("--bodyBackground", colors.bodyBackground);
+        root.style.setProperty("--fontColor", colors.fontColor);
+        root.style.setProperty("--containerBackground", colors.containerBackground);
+        root.style.setProperty("--hoverBackground", colors.hoverBackground);
+        basic.setClassAttribute(colorButton, colors.icon);
+        colorMode = colors.mode;
+    }
+    else {
+        return;
+    }
+}
 
 
 
