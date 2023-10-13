@@ -1,5 +1,5 @@
 # Weather Vision
-The project is made to be used manly on mobile.
+The project is made to be used mainly on mobile.
 
 A JavaScript project for weather cast app. Showing the live hourly and daily weather conditions for a chosen city.
 The project can be seen online on this link: https://weather-vision.netlify.app/
