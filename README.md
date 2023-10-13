@@ -1,6 +1,8 @@
 # Weather Vision
 
-A JavaScript project for weather cast app. Showing the daily/hourly weather conditions for a chosen city
+A JavaScript project for weather cast app. Showing the live hourly and daily weather conditions for a chosen city.
+The project is made to be used manly on mobile.
+The project can be seen online on this link: https://weather-vision.netlify.app/
 
 ## Table of content
 
@@ -63,3 +65,21 @@ The current wheather container displays live weahter data for certain city. It d
 
 Container with 24 section for each hour of the day showing hour, weather icon, temperature and possibility of rain in percents. When clicked on certain section it displays more information about that hour.  
   
+## Daily weather container
+
+Container with 3 sections(should be 7 but the api is bugged) for next 3 days including the current. In the containers are shown the day, possibility of rain, weather icon and highest and lowest temperature of the day.
+
+## Additional information container 
+
+Container with 4 sections showing different parameters for the day. Uv level, humidity in percents, wind in km/h and sunrise and sunset.
+
+## Project requirements
+
+The only thing required to run this project is Live Server extension from Visual Studio's marketplace/extensions.
+  Marketplace: https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+  Id: ritwickdey.LiveServer
+
+## Project setup
+
+1. Install Live Server
+2. Click Go Live in the bottom right corner or right click on the index then click Open with Live Server
