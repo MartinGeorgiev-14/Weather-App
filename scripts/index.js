@@ -305,7 +305,6 @@ export function currentWeather(data){
 //Checks for selected element and updated the weather stats on clicked element    
         dayInfo.addEventListener("click", function(){
 
-            dayNum = i;
             if(daysCon.querySelector(".slected-slide"))
             {   
                 if(sliderInnerCon.querySelector(".slected-slide")){
@@ -316,7 +315,7 @@ export function currentWeather(data){
                 basic.removeClassAttribute(removeSelectedClass, "slected-slide");
             }
 
-            specific.updateHourlyWeather(data, i, dayNum);
+            specific.updateHourlyWeather(data, i);
             basic.addClassAttribute(dayInfo, "slected-slide");
         });
     }
