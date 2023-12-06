@@ -48,6 +48,7 @@ colorButton.addEventListener("click", function(){
             containerBackground: "#5B9BE3",
             hoverBackground: "#7AADE6",
             icon: "fa-regular fa-sun",
+            bodyBackground: `url("../images/daysky.jpg")`,
             mode: false
         },
         {   //Dark colors
@@ -56,6 +57,7 @@ colorButton.addEventListener("click", function(){
             containerBackground: "#161616",
             hoverBackground: "#464646",
             icon: "fa-regular fa-moon",
+            bodyBackground: `url("../images/nightsky.jpg")`,
             mode: true
         }
     ]
@@ -66,6 +68,7 @@ colorButton.addEventListener("click", function(){
         root.style.setProperty("--fontColor", colors[0].fontColor);
         root.style.setProperty("--containerBackground", colors[0].containerBackground);
         root.style.setProperty("--hoverBackground", colors[0].hoverBackground);
+        root.style.setProperty("--backgroundImg", colors[0].bodyBackground)
         localStorage.setItem("colors", JSON.stringify(colors[0]));
         colorMode = false;
     }
@@ -76,6 +79,7 @@ colorButton.addEventListener("click", function(){
         root.style.setProperty("--fontColor", colors[1].fontColor);
         root.style.setProperty("--containerBackground", colors[1].containerBackground);
         root.style.setProperty("--hoverBackground", colors[1].hoverBackground);
+        root.style.setProperty("--backgroundImg", colors[1].bodyBackground)
         localStorage.setItem("colors", JSON.stringify(colors[1]));
         colorMode = true;
     }
@@ -437,6 +441,7 @@ function colorSave(){
         root.style.setProperty("--fontColor", colors.fontColor);
         root.style.setProperty("--containerBackground", colors.containerBackground);
         root.style.setProperty("--hoverBackground", colors.hoverBackground);
+        root.style.setProperty("--backgroundImg", colors.bodyBackground)
         basic.setClassAttribute(colorButton, colors.icon);
         colorMode = colors.mode;
     }

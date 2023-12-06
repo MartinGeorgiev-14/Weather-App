@@ -317,3 +317,4 @@ function extractDateDate(date)
 
     return joined;
 }
+
