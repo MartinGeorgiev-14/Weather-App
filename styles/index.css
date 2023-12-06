@@ -28,7 +28,7 @@ header h1 {
 
 header nav{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-left: 1rem;
     margin-right: 1rem;
 }
@@ -50,6 +50,7 @@ header nav{
     width: 50%;
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
+    font-size: 1.2rem;
 }
 
 #search-bar{
@@ -67,31 +68,31 @@ header nav{
     cursor: pointer;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+    font-size: 1.5rem;
 }
 
 /* Search container end */
 
 
 /* Top left buttons start */
-#top-right-buttons{
+#top-left-buttons{
    display: flex;
    justify-content: center;
-   align-items: flex-end;
-   gap: 0.3rem;
-    
+   align-items: center;
+   gap: 0.5rem;
 }
 
-#top-right-buttons i{
-    padding: 0.3rem;
-    width: 2rem;
+#top-left-buttons i{
+    padding: 0.5rem;
+    width: 2.6rem;
     border-radius: 0.5rem;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
     background-color: var(--containerBackground);
 }
 
-#top-right-buttons i:hover{
+#top-left-buttons i:hover{
     background-color: var(--hoverBackground);
 }
 
@@ -106,18 +107,19 @@ header nav{
 #dropdowns {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     gap: 0.3rem;
 }
 
 #dropdowns i{
-    color: var(--fontColor);
-    background-color: var(--containerBackground);
-    width: 2rem;
-    padding: 0.3rem;
+    padding: 0.5rem;
+    width: 2.6rem;
     border-radius: 0.5rem;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background-color: var(--containerBackground);
+    color: var(--fontColor);
 }
 
 #dropdowns i:hover{
@@ -125,15 +127,14 @@ header nav{
 }
 
 #select-city-drop{
+    display: inline-block;
     position: relative;
 }
 
 #drop-input{
     display: none;
     position: relative; 
-    right: 9rem; 
-    width: 100%;
-    z-index: 1;
+  
     
 }
 
@@ -163,18 +164,18 @@ header nav{
 
 #drop-save{
     display: none;
-    position: absolute; 
-    right: 1rem;
-    width: auto;
-    z-index: 1;
+    position: relative; 
 }
 
+
 #save-input{
-    display: flex;
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
 }
 
 #save-input input{
-    padding: 0.4rem;
+    padding: 0.5rem;
     border: none;
     outline: none;
     border-top-left-radius: 0.5rem;
@@ -185,11 +186,19 @@ header nav{
     width: 100%;
 }
 
+#save-cities-drop { 
+    display: inline-block;
+    position: relative;
+}
+
 #saved-cities-drop:hover #drop-save{
     display: flex;
-    align-items: center;
     flex-direction: column;
+    position: absolute;
+    
 }
+
+
 
 .saved-city{
     display: flex;
@@ -533,3 +542,4 @@ footer{
 
 
 /* End Footer*/
+
