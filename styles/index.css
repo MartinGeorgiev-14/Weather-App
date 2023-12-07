@@ -15,7 +15,9 @@
 
 body{
     background-image: var(--backgroundImg);
-    background-size: cover;
+    background-position: center;
+  
+    background-size: cover  ;
     font-family: 'Kanit', sans-serif;
     display: flex;
     flex-direction: column;
