@@ -75,11 +75,11 @@ Container with 4 sections showing different parameters for the day. Uv level, hu
 
 ## Project requirements
 
-The only thing required to run this project is Live Server extension from Visual Studio's marketplace/extensions.
-  - Marketplace: https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
-  - Id: ritwickdey.LiveServer
+  - Node.js (leatest version)
+  - json-server (leatest version)
 
 ## Project setup
 
-1. Install Live Server
-2. Click Go Live in the bottom right corner or right click on the index then click Open with Live Server
+1. Install Node.js (leatest version)
+2. Install globally json-server (open cmd and perform the following command "npm install -g json-server")
+3. Start the database (db.json) by opening cmd in the directory of the app and enter the following command "json-server --watch db.json". You can access the server with "http://localhost:3000"
